@@ -1,4 +1,4 @@
-﻿namespace ClickSell.Core
+﻿namespace IngenieriaBosco.Core
 {
     public enum ColorScheme
     {

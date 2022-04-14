@@ -11,7 +11,7 @@ namespace IngenieriaBosco.Interface
 {
     public class ThemeSetUp
     {
-        public static ITheme Init()
+        public ITheme Init()
         {
             ITheme theme = new PaletteHelper().GetTheme();
 

@@ -19,6 +19,7 @@ namespace IngenieriaBosco.Core.ViewModels
         }
         public GridListModel<ItemModel> Items { get; }
         public ICommand RefreshCommand => new RelayCommand(_ => RefreshView(), _ => Items.SelectedItem != null);
+        public ICommand HomeCommand => new RelayCommand(_ => Items.SelectedItem = Items.Collection[0], _ => Items.Collection.Count > 0);
         private void RefreshView()
         {
             if (Items.SelectedItem!.Content is FrameworkElement view)

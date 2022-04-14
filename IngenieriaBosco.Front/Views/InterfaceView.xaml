@@ -34,7 +34,7 @@
 
                         <ToggleButton
             Margin="8 0 16 0"
-            IsChecked="{Binding IsDarkTheme}"/>
+            IsChecked="{Binding ThemeControls.IsDarkTheme}"/>
 
                         <TextBlock
             VerticalAlignment="Center"
@@ -47,7 +47,7 @@
 
                         <ToggleButton
             Margin="8 0 0 0"
-            IsChecked="{Binding IsColorAdjusted}"/>
+            IsChecked="{Binding ThemeControls.IsColorAdjusted}"/>
 
                         <wpf:PopupBox StaysOpen="True">
                             <Grid Margin="8">
@@ -75,7 +75,7 @@
                     Minimum="1"
                     Maximum="21"
                     TickFrequency="0.1"
-                    Value="{Binding DesiredContrastRatio}"
+                    Value="{Binding ThemeControls.DesiredContrastRatio}"
                     IsSnapToTickEnabled="True"
                     VerticalAlignment="Center"
                     Width="150"/>
@@ -86,7 +86,7 @@
                     TextAlignment="Right"
                     Margin="8"
                     Width="40"
-                    Text="{Binding DesiredContrastRatio, StringFormat={}{0}:1}">
+                    Text="{Binding ThemeControls.DesiredContrastRatio, StringFormat={}{0}:1}">
                                 </TextBlock>
 
                                 <TextBlock
@@ -98,8 +98,8 @@
                                 <ComboBox
                     Grid.Column="1"
                     Grid.Row="1"
-                    ItemsSource="{Binding ContrastValues}"
-                    SelectedItem="{Binding ContrastValue}"/>
+                    ItemsSource="{Binding ThemeControls.ContrastValues}"
+                    SelectedItem="{Binding ThemeControls.ContrastValue}"/>
 
                                 <TextBlock
                     Grid.Column="0"
@@ -110,8 +110,8 @@
                                 <ComboBox
                     Grid.Column="1"
                     Grid.Row="2"
-                    ItemsSource="{Binding ColorSelectionValues}"
-                    SelectedItem="{Binding ColorSelectionValue}"/>
+                    ItemsSource="{Binding ThemeControls.ColorSelectionValues}"
+                    SelectedItem="{Binding ThemeControls.ColorSelectionValue}"/>
                             </Grid>
                         </wpf:PopupBox>
                     </StackPanel>
@@ -143,7 +143,7 @@
                                 x:Name="ColorPicker"
                                 Grid.Column="1"
                                 Height="150"
-                                Color="{Binding SelectedColor, Delay=25}"/>
+                                Color="{Binding InterfaceControls.SelectedColor, Delay=25}"/>
                         </Grid>
                     </DockPanel>
                 </DockPanel>
