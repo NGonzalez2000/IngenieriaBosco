@@ -5,7 +5,12 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Interface\Icon\favicon.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Interface\Icon\favicon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.5" />
@@ -15,18 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Interface\ThemeSettings.Designer.cs">
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ThemeSettings.settings</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="Interface\ThemeSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>ThemeSettings.Designer.cs</LastGenOutput>
-    </None>
+    <ProjectReference Include="..\IngenieriaBosco.Core\IngenieriaBosco.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -17,8 +17,7 @@ namespace IngenieriaBosco.Front.Converters
             str = str.Replace(".", "")
                 .Replace("$", "").Replace(",", "").TrimStart('0');
 
-            decimal ul;
-            decimal.TryParse(str, out ul);
+            _ = decimal.TryParse(str, out decimal ul);
 
             return ul / 100;
         }

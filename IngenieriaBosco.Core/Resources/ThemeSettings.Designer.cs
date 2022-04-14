@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IngenieriaBosco.Interface {
+namespace IngenieriaBosco.Core.Resources {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
-    internal sealed partial class ThemeSettings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class ThemeSettings : global::System.Configuration.ApplicationSettingsBase {
         
         private static ThemeSettings defaultInstance = ((ThemeSettings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new ThemeSettings())));
         

@@ -2,8 +2,10 @@
 using System;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace IngenieriaBosco.Front.Controls.TextBoxs
 {
@@ -19,7 +21,7 @@ namespace IngenieriaBosco.Front.Controls.TextBoxs
                 {
                     bindingPath = value;
                     Binding binding = new(bindingPath);
-                    binding.Converter = new EsARConverter();
+                    binding.Converter = new ESARConverter();
                     binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                     SetBinding(TextProperty, binding);
                 };
@@ -79,7 +81,7 @@ namespace IngenieriaBosco.Front.Controls.TextBoxs
             MoneyTextBox.CaretIndex = int.MaxValue;
         }
 
-        private bool TextisValid(string text)
+        private static bool TextisValid(string text)
         {
             Regex money = new(@"^\$ (\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$");
             return money.IsMatch(text);

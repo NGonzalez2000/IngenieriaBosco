@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:IngenieriaBosco" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:IngenieriaBosco" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         AutomationProperties.Name="{Binding Title, RelativeSource={RelativeSource Self}}"
         WindowState="Maximized"
         Style="{StaticResource MaterialDesignWindow}"
@@ -37,25 +38,11 @@
                             Margin="16"
                             IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
 
-                    <TextBox 
-                            x:Name="ItemsSearchBox"
-                            Text="{Binding SearchKeyword, UpdateSourceTrigger=PropertyChanged}"
-                            DockPanel.Dock="Top"
-                            Margin="16, 4"
-                            Width="200"
-                            materialDesign:HintAssist.Hint="Buscar"
-                            materialDesign:HintAssist.IsFloating="True"
-                            materialDesign:TextFieldAssist.HasClearButton="True"
-                            materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-                            materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                            materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
-
                     <ListBox 
                             x:Name="ItemsListBox" 
                             Margin="0 16 0 16"
-                            SelectedIndex="{Binding SelectedIndex}"
-                            SelectedItem="{Binding SelectedItem, UpdateSourceTrigger=PropertyChanged}"
-                            ItemsSource="{Binding Items}"
+                            SelectedItem="{Binding Items.SelectedItem, UpdateSourceTrigger=PropertyChanged}"
+                            ItemsSource="{Binding Items.Collection}"
                             PreviewMouseLeftButtonUp="UIElement_OnPreviewMouseLeftButtonUp"
                             AutomationProperties.Name="PagesListBox"
                             Style="{StaticResource MaterialDesignNavigationPrimaryListBox}">
@@ -83,13 +70,12 @@
                                     x:Name="MenuToggleButton"
                                     Style="{StaticResource MaterialDesignHamburgerToggleButton}"
                                     IsChecked="False"
-                                    Click="MenuToggleButton_OnClick"
                                     AutomationProperties.Name="HamburgerToggleButton"/>
 
                             <Button
                                     Margin="16,0,0,0"
                                     ToolTip="Inicio"
-                                    Command="{Binding HomeCommand}"
+                                    Command="{Binding Path=HomeCommand}"
                                     Content="{materialDesign:PackIcon Kind=Home, Size=24}"
                                     Style="{DynamicResource MaterialDesignToolButton}"
                                     Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
@@ -97,7 +83,7 @@
                             <Button
                                     Margin="16,0,0,0"
                                     ToolTip="Actualizar"
-                                    Command="{Binding RefreshCommand}"
+                                    Command="{Binding Path=RefreshCommand}"
                                     Content="{materialDesign:PackIcon Kind=Refresh, Size=24}"
                                     Style="{DynamicResource MaterialDesignToolButton}"
                                     Foreground="{Binding RelativeSource={RelativeSource AncestorType={x:Type FrameworkElement}}, Path=(TextElement.Foreground)}"
@@ -124,7 +110,7 @@
                     <ContentControl
                                 Grid.Row="1"
                             
-                                DataContext="{Binding SelectedItem}"
+                                DataContext="{Binding Items.SelectedItem}"
                                 Margin="{Binding MarginRequirement, FallbackValue=16}"
                                 Content="{Binding Content, UpdateSourceTrigger=PropertyChanged, FallbackValue={x:Null}}"/>
 

@@ -1,4 +1,5 @@
 ﻿using IngenieriaBosco.Core.Resources;
+using System;
 using System.Collections.ObjectModel;
 
 namespace IngenieriaBosco.Core.Models.Generics
@@ -18,7 +19,13 @@ namespace IngenieriaBosco.Core.Models.Generics
         public T? SelectedItem
         {
             get { return selectedItem; }
-            set => SetProperty(ref selectedItem, value);
+            set
+            {
+                if(SetProperty(ref selectedItem, value) && selectedItem != null && OnSelectionChanged != null)
+                {
+                    OnSelectionChanged!.Invoke(selectedItem);
+                }
+            }
         }
 
         #endregion
@@ -45,6 +52,7 @@ namespace IngenieriaBosco.Core.Models.Generics
             OnPropertyChanged(nameof(Collection));
         }
 
+        public Action<T>? OnSelectionChanged;
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using IngenieriaBosco.Core.Resources;
+using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace IngenieriaBosco.Interface
 {
     public class ThemeSetUp
     {
-        public ITheme Init()
+        public static ITheme Init()
         {
             ITheme theme = new PaletteHelper().GetTheme();
 
