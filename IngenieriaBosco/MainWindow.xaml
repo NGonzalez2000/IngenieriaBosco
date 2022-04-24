@@ -24,7 +24,7 @@
     
     <!-- BODY -->
     <materialDesign:DialogHost
-        Identifier="RootDialog"
+        Identifier="MainDialog"
         DialogTheme="Inherit"
         SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}">
         <materialDesign:DrawerHost
@@ -51,7 +51,7 @@
                         </ListBox.Resources>
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="models:ItemModel">
-                                <TextBlock Text="{Binding Name}" Margin="24 4 0 4" AutomationProperties.AutomationId="ItemPage"/>
+                                <TextBlock Text="{Binding Name}" Margin="24 4 0 4" FontSize="{DynamicResource ButtonFontSize}" AutomationProperties.AutomationId="ItemPage"/>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                     </ListBox>
@@ -64,7 +64,7 @@
                         materialDesign:ShadowAssist.ShadowDepth="Depth2"
                         Mode="PrimaryMid"
                         DockPanel.Dock="Top">
-                    <DockPanel>
+                    <Grid>
                         <StackPanel Orientation="Horizontal">
                             <ToggleButton
                                     x:Name="MenuToggleButton"
@@ -93,10 +93,10 @@
                         <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                FontSize="22"
+                                FontSize="{DynamicResource HeaderFontSize}"
                                 AutomationProperties.Name="ClickSell"
                                 Text="ClickSell"/>
-                    </DockPanel>
+                    </Grid>
                 </materialDesign:ColorZone>
 
                 <Grid>

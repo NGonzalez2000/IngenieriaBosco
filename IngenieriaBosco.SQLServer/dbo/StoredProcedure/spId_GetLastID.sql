@@ -1,0 +1,10 @@
+﻿CREATE PROCEDURE [dbo].[spId_GetLastID]
+	@TableName NVARCHAR(50)
+AS
+BEGIN
+
+SET NOCOUNT ON
+
+	SELECT IDENT_CURRENT(@TableName)
+
+END

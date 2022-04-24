@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="IngenieriaBosco.Front.Dialogs.Filters.ProductFilter"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IngenieriaBosco.Front.Dialogs.Filters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+
+    <UniformGrid Columns="2">
+        <StackPanel>
+            <TextBox
+                materialDesign:HintAssist.Hint ="Código"
+                Text="{Binding Path=ProductDescription}"
+                Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                CharacterCasing="Upper"
+                MinWidth="150"
+                MaxWidth="150"
+                Margin="15"/>
+
+            <ComboBox
+                x:Name="CategoryComboBox"
+                MinWidth="150"
+                MaxWidth="150"
+                VerticalContentAlignment="Bottom"
+                materialDesign:HintAssist.Hint="Categoría"
+                Margin="15"
+                ItemsSource="{Binding Path=Categories}"
+                SelectedItem="{Binding Path=SelectedCategory}"/>
+        </StackPanel>
+
+        <StackPanel>
+            <TextBox
+                materialDesign:HintAssist.Hint ="Descripción"
+                Text="{Binding Path=ProductDescription}"
+                Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                CharacterCasing="Upper"
+                MinWidth="150"
+                MaxWidth="150"
+                Margin="15"/>
+
+            <ComboBox
+                MinWidth="150"
+                MaxWidth="150"
+                VerticalContentAlignment="Bottom"
+                materialDesign:HintAssist.Hint="Marca"
+                Margin="15"
+                ItemsSource="{Binding Path=Brands}"
+                SelectedItem="{Binding Path=SelectedBrand}">
+            </ComboBox>
+        </StackPanel>
+    </UniformGrid>
+</UserControl>

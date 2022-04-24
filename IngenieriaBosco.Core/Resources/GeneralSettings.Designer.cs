@@ -34,5 +34,65 @@ namespace IngenieriaBosco.Core.Resources {
                 this["NeedsUpdate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("22")]
+        public double HeaderFontSize {
+            get {
+                return ((double)(this["HeaderFontSize"]));
+            }
+            set {
+                this["HeaderFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public double ButtonFontSize {
+            get {
+                return ((double)(this["ButtonFontSize"]));
+            }
+            set {
+                this["ButtonFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public double GeneralFontSize {
+            get {
+                return ((double)(this["GeneralFontSize"]));
+            }
+            set {
+                this["GeneralFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("18")]
+        public double SecondaryHeaderFontSize {
+            get {
+                return ((double)(this["SecondaryHeaderFontSize"]));
+            }
+            set {
+                this["SecondaryHeaderFontSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16")]
+        public double GridFontSize {
+            get {
+                return ((double)(this["GridFontSize"]));
+            }
+            set {
+                this["GridFontSize"] = value;
+            }
+        }
     }
 }

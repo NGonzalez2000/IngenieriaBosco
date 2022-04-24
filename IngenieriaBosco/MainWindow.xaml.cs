@@ -1,4 +1,5 @@
-﻿using IngenieriaBosco.Core.Resources;
+﻿using IngenieriaBosco.Core.Models.Controls;
+using IngenieriaBosco.Core.Resources;
 using IngenieriaBosco.Core.ViewModels;
 using IngenieriaBosco.Interface;
 using MaterialDesignThemes.Wpf;
@@ -42,7 +43,15 @@ namespace IngenieriaBosco
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             DataContext = new MainWindowsViewModel(MainSnackbar.MessageQueue!);
+
+            string sqlException = DBAccess.TestConnection();
+            if (sqlException != string.Empty)
+                FixConnection(sqlException);
+
+            AddDynamicResources();
         }
+
+        
 
         private void UIElement_OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -70,6 +79,19 @@ namespace IngenieriaBosco
                     Trace.WriteLine(ex.ToString());
                 }
             }
+        }
+        private static void FixConnection(string sqlException)
+        {
+            SqlExceptionControl sqlExceptionControl = new(sqlException);
+            sqlExceptionControl.ShowDialog();
+        }
+        private void AddDynamicResources()
+        {
+            Resources["HeaderFontSize"] = GeneralSettings.Default.HeaderFontSize;
+            Resources["SecondaryHeaderFontSize"] = GeneralSettings.Default.SecondaryHeaderFontSize;
+            Resources["ButtonFontSize"] = GeneralSettings.Default.ButtonFontSize;
+            Resources["GeneralFontSize"] = GeneralSettings.Default.GeneralFontSize;
+            Resources["GridFontSize"] = GeneralSettings.Default.GridFontSize;
         }
     }
 }

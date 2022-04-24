@@ -9,9 +9,8 @@ namespace IngenieriaBosco.Core.ViewModels
         public DashboardViewModel(ISnackbarMessageQueue snackbarMessageQueue) : base(snackbarMessageQueue)
         {
         }
-        public override void Load()
+        public async override void Load()
         {
-            MessageBox.Show("DashboardLoad");
         }
     }
 }

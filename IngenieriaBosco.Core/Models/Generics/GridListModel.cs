@@ -1,21 +1,23 @@
-﻿using IngenieriaBosco.Core.Resources;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace IngenieriaBosco.Core.Models.Generics
 {
     public class GridListModel<T> : INotify
     {
-        #region Propiedades
 
         private T? selectedItem;
         private ObservableCollection<T> collection;
+        private ICollectionView collectionView;
         public ObservableCollection<T> Collection
         {
             get { return collection; }
             set { collection = value; }
         }
-
         public T? SelectedItem
         {
             get { return selectedItem; }
@@ -28,31 +30,40 @@ namespace IngenieriaBosco.Core.Models.Generics
             }
         }
 
-        #endregion
-
         public GridListModel()
         {
+
             collection = new ObservableCollection<T>();
+            collectionView = CollectionViewSource.GetDefaultView(collection);
+        }
+        public GridListModel(IEnumerable<T>? _collection) : this()
+        {
+            if(_collection != null) collection = new(_collection);
         }
 
-        #region Metodos
-        public void Insert(T item)
+        public void FilterExecute(Predicate<object> predicate)
         {
-            Collection.Add(item);
-            OnPropertyChanged(nameof(Collection));
+            collectionView = CollectionViewSource.GetDefaultView(collection);
+            collectionView.Filter = predicate;
+            collectionView.Refresh();
         }
+        public void SortExecute(SortDescription sortDescription)
+        {
+            collectionView.SortDescriptions.Clear();
+            collectionView.SortDescriptions.Add(sortDescription);
+            collectionView.Refresh();
+        }
+        public void Insert(T item)
+            => Collection.Add(item);
         public void Edit(T oldi, T newi)
         {
-            Collection[Collection.IndexOf(oldi)] = newi;
-            OnPropertyChanged(nameof(Collection));
-        }
+            int indx = Collection.IndexOf(oldi);
+            Collection[indx] = newi;
+            SelectedItem = Collection[indx];
+        } 
         public void Delete(T item)
-        {
-            Collection.Remove(item);
-            OnPropertyChanged(nameof(Collection));
-        }
+            => Collection.Remove(item);
 
         public Action<T>? OnSelectionChanged;
-        #endregion
     }
 }

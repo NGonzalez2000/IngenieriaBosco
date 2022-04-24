@@ -7,11 +7,15 @@ using System.Threading.Tasks;
 
 namespace IngenieriaBosco.Core.Models
 {
-    public class ProductModel : INotify
+    public class ProductModel
     {
         public int ID { get; set; }
+        public int CategoryId { get; set; }
+        public int BrandId { get; set; }
         public string? Code { get; set; }
         public string? Description { get; set; }
+        public string? CategoryName { get; set; }
+        public string? BrandName { get; set; }
         public decimal ListingPrice { get; set; }
         public decimal RetailPrice { get; set; }
         public decimal WholesalerPrice { get; set; }

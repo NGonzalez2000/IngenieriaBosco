@@ -1,0 +1,325 @@
+﻿<UserControl x:Class="IngenieriaBosco.Front.Views.CategoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:IngenieriaBosco.Front.Views"
+             xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:BooleanToSINOConverter x:Key="SiNoConverter"/>
+    </UserControl.Resources>
+
+    <materialDesign:DialogHost
+        DialogTheme="Inherit"
+        Identifier="CategoryDialog">
+
+        <UniformGrid
+        Columns="3">
+
+
+            <!-- Categories -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <UniformGrid Columns="2">
+                    <TextBox 
+                    HorizontalAlignment="Left"
+                    Text="{Binding Path=CategoryName, UpdateSourceTrigger=PropertyChanged}"
+                    DockPanel.Dock="Left"
+                    MinWidth="150"
+                    MaxWidth="250"
+                    Margin="16, 12"
+                    materialDesign:HintAssist.Hint="Categoría"
+                    materialDesign:HintAssist.IsFloating="True"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+                    <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+                        <Button
+                            ToolTip="CREAR"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            Command="{Binding Path=NewCategoryCommand}">
+                            <Button.Content>
+                                <materialDesign:PackIcon Kind="Add"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                            </Button.Content>
+                        </Button>
+
+                        <Button
+                            ToolTip="EDITAR"
+                            Style="{StaticResource MaterialDesignIconButton}"
+                            Command="{Binding Path=EditCategoryCommand}">
+                            <Button.Content>
+                                <materialDesign:PackIcon Kind="Pencil"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                            </Button.Content>
+                        </Button>
+                        <Button
+                            ToolTip="ELIMINAR"
+                            Command="{Binding Path=DeleteCategoryCommand}"
+                            Style="{StaticResource MaterialDesignIconButton}">
+                            <Button.Content>
+                                <materialDesign:PackIcon Kind="Delete"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </UniformGrid>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="20 0">
+                    <TextBlock
+                            Text="Categoría seleccionada: "
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Bottom"/>
+
+                    <TextBlock 
+                            Text="{Binding Path=CategoryList.SelectedItem.Name}"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Bottom"/>
+                </StackPanel>
+
+
+                <ListView
+                Grid.Row="2"
+                ItemsSource="{Binding Path=CategoryList.Collection}"
+                SelectedItem="{Binding Path=CategoryList.SelectedItem}"
+                Margin="0 20">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn
+                            Header="Nombre"
+                            DisplayMemberBinding="{Binding Path=Name}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                        Text="{Binding}"
+                                        FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+
+            <!-- Brands -->
+            <Border
+                BorderBrush="{DynamicResource SecondaryHueMidBrush}"
+                BorderThickness="1 0 1 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <UniformGrid Columns="2">
+                        <TextBox 
+                                HorizontalAlignment="Left"
+                                Text="{Binding Path=BrandName, UpdateSourceTrigger=PropertyChanged}"
+                                DockPanel.Dock="Left"
+                                MinWidth="150"
+                                MaxWidth="250"
+                                Margin="16, 12"
+                                materialDesign:HintAssist.Hint="Marca"
+                                materialDesign:HintAssist.IsFloating="True"
+                                materialDesign:TextFieldAssist.HasClearButton="True"
+                                materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                                materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                                materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
+
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+
+                            <Button
+                                ToolTip="CREAR"
+                                Style="{StaticResource MaterialDesignIconButton}">
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Add"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                            <Button
+                                ToolTip="EDITAR"
+                                Style="{StaticResource MaterialDesignIconButton}">
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Pencil"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+                            <Button
+                                ToolTip="ELIMINAR"
+                                Style="{StaticResource MaterialDesignIconButton}">
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Delete"
+                                        Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <StackPanel
+                        Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left"
+                        Margin="20 0">
+                        <TextBlock
+                                Text="Marca seleccionada: "
+                                FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                                VerticalAlignment="Bottom"/>
+
+                        <TextBlock 
+                                Text="{Binding Path=BrandList.SelectedItem.Name}"
+                                FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                                VerticalAlignment="Bottom"/>
+                    </StackPanel>
+                    
+                    <ListView
+                        Grid.Row="2"
+                        ItemsSource="{Binding Path=BrandList.Collection}"
+                        SelectedItem="{Binding Path=BrandList.SelectedItem}"
+                        Margin="0 20">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn
+                                Header="Nombre"
+                                DisplayMemberBinding="{Binding Path=Name}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                            Text="{Binding}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn
+                                Header="Es en dolar"
+                                DisplayMemberBinding="{Binding Path=IsDolarValue,Converter={StaticResource SiNoConverter}}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBlock
+                                            Text="{Binding}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Border>
+
+            <!-- Providers -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <UniformGrid Columns="2">
+                        <TextBox 
+                    HorizontalAlignment="Left"
+                    Text="{Binding Path=ProviderName, UpdateSourceTrigger=PropertyChanged}"
+                    DockPanel.Dock="Left"
+                    MinWidth="150"
+                    MaxWidth="250"
+                    Margin="16, 12"
+                    materialDesign:HintAssist.Hint="Proveedor"
+                    materialDesign:HintAssist.IsFloating="True"
+                    materialDesign:TextFieldAssist.HasClearButton="True"
+                    materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
+                    />
+                        
+
+                    <StackPanel
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
+                        <Button
+                        ToolTip="AGREGAR"
+                        Style="{StaticResource MaterialDesignIconButton}">
+                            <Button.Content>
+                                <materialDesign:PackIcon Kind="Add"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                            </Button.Content>
+                        </Button>
+
+
+                        <Button
+                        ToolTip="ELIMINAR"
+                        Style="{StaticResource MaterialDesignIconButton}">
+                            <Button.Content>
+                                <materialDesign:PackIcon Kind="Delete"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                </UniformGrid>
+
+                <StackPanel
+                    Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    Margin="20 0">
+                    <TextBlock
+                            Text="Proveedor seleccionado: "
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Bottom"/>
+
+                    <TextBlock 
+                            Text="{Binding Path=ProviderList.SelectedItem.Name}"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Bottom"/>
+                </StackPanel>
+
+                <ListView
+                Grid.Row="2"
+                ItemsSource="{Binding Path=ProviderList.Collection}"
+                SelectedItem="{Binding Path=ProviderList.SelectedItem}"
+                Margin="0 20">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn
+                            Header="Nombre"
+                            DisplayMemberBinding="{Binding Path=Name}">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                        Text="{Binding}"
+                                        FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+
+            </Grid>
+            
+        </UniformGrid>
+    </materialDesign:DialogHost>
+</UserControl>
