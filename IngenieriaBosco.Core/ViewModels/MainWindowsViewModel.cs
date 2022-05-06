@@ -34,8 +34,9 @@ namespace IngenieriaBosco.Core.ViewModels
                 (view.DataContext as BaseViewModel)!.Load();
             }
         }
-        private void OnSelectionChanged(object item)
+        private void OnSelectionChanged(object? item)
         {
+            if (item == null) return;
             if((item as ItemModel)!.Content is FrameworkElement view)
             {
                 (view.DataContext as BaseViewModel)!.Load();
@@ -46,6 +47,8 @@ namespace IngenieriaBosco.Core.ViewModels
         {
             yield return new ItemModel("Productos", typeof(ProductView), new ProductViewModel(snackbarMessageQueue));
             yield return new ItemModel("Categorías y marcas", typeof(CategoryView), new CategoryViewModel(snackbarMessageQueue));
+            yield return new ItemModel("Proveedores", typeof(ProviderView), new ProviderViewModel(snackbarMessageQueue));
+            yield return new ItemModel("Clientes", typeof(ClientView), new ClientViewModel(snackbarMessageQueue));
         }
     }
 }

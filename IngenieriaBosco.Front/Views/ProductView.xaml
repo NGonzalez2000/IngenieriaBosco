@@ -11,7 +11,7 @@
     
     
     <materialDesign:DialogHost
-        Identifier="ProductViewModelDialog"
+        Identifier="ProductViewDialog"
         DialogTheme="Inherit">
         
         <Grid>
@@ -28,6 +28,7 @@
                     <Button
                         Margin="20 30 20 20"
                         FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=NewProductCommand}"
                         Content="NUEVO PRODUCTO"/>
                     <Button
                         Margin="20"
@@ -41,10 +42,10 @@
                 <StackPanel>
                     <UniformGrid Columns="2">
                         <TextBlock
-                        Text="PRODUCTO SELECCIONADO"
-                        Margin="0 20 0 0"
-                        FontSize="{DynamicResource HeaderFontSize}"
-                        Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                            Text="PRODUCTO SELECCIONADO"
+                            Margin="0 20 0 0"
+                            FontSize="{DynamicResource HeaderFontSize}"
+                            Foreground="{DynamicResource SecondaryHueMidBrush}"/>
                         <StackPanel
                             Orientation="Horizontal"
                             HorizontalAlignment="Right">
@@ -75,26 +76,26 @@
                         Background="{DynamicResource PrimaryHueMidBrush}"
                         Height="2"/>
                     <StackPanel
-                        Margin="20"
+                        Margin="0 20 0 0"
                         Orientation="Horizontal">
                         <TextBlock
                             Text="Código:   "
                             FontFamily="Bold"
                             FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
                         <TextBlock
-                            Text="{Binding Path=Products.SelectedItem.Code}"
+                            Text="{Binding Path=ProductList.SelectedItem.Code}"
                             FontSize="{DynamicResource GeneralFontSize}"/>
                     </StackPanel>
                     
                     <StackPanel
-                        Margin="20 0"
+                        Margin="0 20 0 0"
                         Orientation="Horizontal">
                         <TextBlock
                             Text="Descripción:   "
                             FontFamily="Bold"
                             FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
                         <TextBlock
-                            Text="{Binding Path=Products.SelectedItem.Description}"
+                            Text="{Binding Path=ProductList.SelectedItem.Description}"
                             FontSize="{DynamicResource GeneralFontSize}"/>
                     </StackPanel>
                 </StackPanel>
@@ -162,102 +163,94 @@
                     Height="2"
                     Background="{DynamicResource PrimaryHueDarkBrush}"/>
                 <ListView
-                    ItemsSource="{Binding Path=Products.Collection}"
-                    SelectedItem="{Binding Path=Products.SelectedItem}">
+                    ItemsSource="{Binding Path=ProductList.Collection}"
+                    SelectedItem="{Binding Path=ProductList.SelectedItem}">
                     <ListView.View>
                         <GridView>
                             
                             <GridViewColumn
-                                Header="Código"
-                                DisplayMemberBinding="{Binding Path=Code}">
+                                Header="Código">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=Code}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
                             <GridViewColumn
-                                Header="Descripción"
-                                DisplayMemberBinding="{Binding Path=Description}">
+                                Header="Descripción">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=Description}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
                             <GridViewColumn
-                                Header="Categoría"
-                                DisplayMemberBinding="{Binding Path=CategoryName}">
+                                Header="Categoría">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=Category.Name}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                             
                             <GridViewColumn
-                                Header="Marca"
-                                DisplayMemberBinding="{Binding Path=BrandName}">
+                                Header="Marca">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=Brand.Name}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
                             <GridViewColumn
-                                Header="Stock"
-                                DisplayMemberBinding="{Binding Path=Stock}">
+                                Header="Stock">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=Stock}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
                             <GridViewColumn
-                                Header="Precio Lista"
-                                DisplayMemberBinding="{Binding Path=ListingPrice}">
+                                Header="Precio Lista">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=ListingPrice}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
                             <GridViewColumn
-                                Header="Precio Minorista"
-                                DisplayMemberBinding="{Binding Path=RetailPrice}">
+                                Header="Precio Minorista">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=RetailPrice}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
                             <GridViewColumn
-                                Header="Precio Mayorista"
-                                DisplayMemberBinding="{Binding Path=WholesalerPrice}">
+                                Header="Precio Mayorista">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding}"
+                                            Text="{Binding Path=WholesalerPrice}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>

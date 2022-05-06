@@ -87,11 +87,11 @@ namespace IngenieriaBosco
         }
         private void AddDynamicResources()
         {
-            Resources["HeaderFontSize"] = GeneralSettings.Default.HeaderFontSize;
-            Resources["SecondaryHeaderFontSize"] = GeneralSettings.Default.SecondaryHeaderFontSize;
-            Resources["ButtonFontSize"] = GeneralSettings.Default.ButtonFontSize;
-            Resources["GeneralFontSize"] = GeneralSettings.Default.GeneralFontSize;
-            Resources["GridFontSize"] = GeneralSettings.Default.GridFontSize;
+            Application.Current.Resources["HeaderFontSize"] = GeneralSettings.Default.HeaderFontSize;
+            Application.Current.Resources["SecondaryHeaderFontSize"] = GeneralSettings.Default.SecondaryHeaderFontSize;
+            Application.Current.Resources["ButtonFontSize"] = GeneralSettings.Default.ButtonFontSize;
+            Application.Current.Resources["GeneralFontSize"] = GeneralSettings.Default.GeneralFontSize;
+            Application.Current.Resources["GridFontSize"] = GeneralSettings.Default.GridFontSize;
         }
     }
 }

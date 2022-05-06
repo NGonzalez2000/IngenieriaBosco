@@ -10,12 +10,13 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="Message" TextWrapping="Wrap" MaxWidth="350" Margin="20 30 20 20"/>
+        <TextBlock x:Name="Message" TextWrapping="Wrap" MaxWidth="350" Margin="20 30 20 20" FontSize="{DynamicResource GeneralFontSize}"/>
         <Button Margin="20" Command="{x:Static wpf:DialogHost.CloseDialogCommand}" Grid.Row="1"
-                IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}">
+                IsDefault="True" Style="{DynamicResource MaterialDesignFlatButton}"
+                FontSize="{DynamicResource ButtonFontSize}">
             <Button.CommandParameter>
                 <system:Boolean>True</system:Boolean>
             </Button.CommandParameter> Aceptar

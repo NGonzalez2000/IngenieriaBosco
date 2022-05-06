@@ -60,8 +60,14 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="PublishDirectory" />
     <Folder Include="dbo\StoredProcedure" />
-    <Folder Include="dbo\StoredProcedure\spProducts" />
+    <Folder Include="dbo\StoredProcedure\spProduct" />
     <Folder Include="dbo\StoredProcedure\spCategory" />
+    <Folder Include="dbo\StoredProcedure\spBrand" />
+    <Folder Include="dbo\StoredProcedure\spCategoryBrands" />
+    <Folder Include="dbo\StoredProcedure\spProvider" />
+    <Folder Include="dbo\StoredProcedure\spBrandProviders" />
+    <Folder Include="dbo\StoredProcedure\spClient" />
+    <Folder Include="ResetDB" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Brands.sql" />
@@ -69,15 +75,45 @@
     <Build Include="dbo\Tables\CategoryBrands.sql" />
     <Build Include="dbo\Tables\Products.sql" />
     <Build Include="dbo\StoredProcedure\spId_GetLastID.sql" />
-    <Build Include="dbo\StoredProcedure\spProducts\spProduct_Insert.sql" />
-    <Build Include="dbo\StoredProcedure\spProducts\spProduct_Update.sql" />
-    <Build Include="dbo\StoredProcedure\spProducts\spProduct_Delete.sql" />
-    <Build Include="dbo\StoredProcedure\spProducts\spProduct_SelectByCategory.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_Update.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_Delete.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_SelectByCategory.sql" />
     <Build Include="dbo\StoredProcedure\spCategory\spCategory_Insert.sql" />
     <Build Include="dbo\StoredProcedure\spCategory\spCategory_Update.sql" />
     <Build Include="dbo\StoredProcedure\spCategory\spCategory_Delete.sql" />
     <Build Include="dbo\StoredProcedure\spCategory\spCategory_SelectAll.sql" />
     <Build Include="dbo\StoredProcedure\spCategory\spCategory_IsDuplicate.sql" />
+    <Build Include="dbo\StoredProcedure\spBrand\spBrand_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spBrand\spBrand_Update.sql" />
+    <Build Include="dbo\StoredProcedure\spBrand\spBrand_Delete.sql" />
+    <Build Include="dbo\StoredProcedure\spBrand\spBrand_SelectByCategoryId.sql" />
+    <Build Include="dbo\StoredProcedure\spCategoryBrands\spCategoryBrands_Insert.sql" />
+    <Build Include="dbo\Tables\Providers.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_Update.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_Delete.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_SelectAll.sql" />
+    <Build Include="dbo\Tables\BrandProviders.sql" />
+    <Build Include="dbo\StoredProcedure\spBrandProviders\spBrandProviders_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spBrandProviders\spBrandProviders_SelectByBrand.sql" />
+    <Build Include="dbo\StoredProcedure\spBrandProviders\spBrandProviders_Delete_Provider.sql" />
+    <Build Include="dbo\Tables\Clients.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_Update.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_Delete.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_SelectAll.sql" />
+    <Build Include="dbo\Tables\ProviderEmails.sql" />
+    <Build Include="dbo\Tables\ClientEmails.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_SelectEmails.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_DeleteEmail.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_InsertEmail.sql" />
+    <Build Include="dbo\StoredProcedure\spProvider\spProvider_UpdateEmail.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_InsertEmail.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_UpdateEmail.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_DeleteEmail.sql" />
+    <Build Include="dbo\StoredProcedure\spClient\spClient_SelectEmails.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_SelectBrand.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishDirectory\IngenieriaBosco.SQLServer.publish.xml" />

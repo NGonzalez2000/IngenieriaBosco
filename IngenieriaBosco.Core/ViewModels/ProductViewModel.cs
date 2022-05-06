@@ -1,22 +1,16 @@
-﻿using IngenieriaBosco.Core.Models;
+﻿using IngenieriaBosco.Core.DialogModels;
 using IngenieriaBosco.Core.Models.Filters;
 using IngenieriaBosco.Core.Models.Generics;
-using IngenieriaBosco.Core.Resources;
 using MaterialDesignThemes.Wpf;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace IngenieriaBosco.Core.ViewModels
 {
     public class ProductViewModel : BaseViewModel
     {
-        public ICommand AddProductCommand => new RelayCommand(_ => AddProductExecute());
-        public GridListModel<ProductModel>? Products { get; set; }
+        public ICommand NewProductCommand => new RelayCommand(_ => NewProductExecute());
+        public GridListModel<ProductModel>? ProductList { get; set; }
         public ProductFilterModel? ProductFilter { get; set; } 
         public ProductSortModel? ProductSort { get; set; }
         public ICommand FilterCommand => new RelayCommand(_ => FilterExecute());
@@ -27,20 +21,33 @@ namespace IngenieriaBosco.Core.ViewModels
         {
 
         }
-        public async override void Load()
+        public override void Load()
         {
-            Products = new();
+            ProductList = new();
             ProductFilter = new ();
             ProductSort = new();
         }
-        private async void AddProductExecute()
+        private async void NewProductExecute()
         {
-
+            ProductDialogModel dialogModel = new();
+            ProductModel? product = await dialogModel.NewProduct();
         }
-        private void FilterExecute()
-            => Products!.FilterExecute(ProductFilter!.Filter);
+        private async void FilterExecute()
+        {
+            if (ProductList is null || ProductFilter!.SelectedCategory is null) return;
 
+
+            ProductList.Collection = new(await DBProduct.SelectByCategory(ProductFilter.SelectedCategory));
+
+
+            foreach(ProductModel product in ProductList.Collection)
+            {
+                product.Category = ProductFilter.SelectedCategory;
+                product.Brand = (await DBProduct.SelectBrand(product)).First();
+            }
+            ProductList.FilterExecute(ProductFilter!.Filter);
+        }
         private void SortExecute()
-            => Products!.SortExecute(ProductSort!.OrderBy());
+            => ProductList!.SortExecute(ProductSort!.OrderBy());
     }
 }

@@ -8,7 +8,7 @@ using System.Windows.Controls;
 
 namespace IngenieriaBosco.Core.DialogModels
 {
-    public class BaseDialogModel : INotify
+    public abstract class BaseDialogModel : INotify
     {
         protected static async Task<bool> DialogHosting(UserControl view, string Dialog = "RootDialog",
                                                             DialogOpenedEventHandler? openedEventHandler = null,
@@ -19,5 +19,7 @@ namespace IngenieriaBosco.Core.DialogModels
             if (result == null || (bool)result == true) return true;
             return false;
         }
+        public abstract void ClosingEventHandler_New(object sender, DialogClosingEventArgs eventArgs);
+        public abstract void ClosingEventHandler_Edit(object sender, DialogClosingEventArgs eventArgs);
     }
 }

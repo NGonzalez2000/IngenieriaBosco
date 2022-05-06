@@ -28,7 +28,8 @@
                 materialDesign:HintAssist.Hint="Categoría"
                 Margin="15"
                 ItemsSource="{Binding Path=Categories}"
-                SelectedItem="{Binding Path=SelectedCategory}"/>
+                SelectedItem="{Binding Path=SelectedCategory}"
+                DisplayMemberPath="Name"/>
         </StackPanel>
 
         <StackPanel>
@@ -46,9 +47,11 @@
                 MaxWidth="150"
                 VerticalContentAlignment="Bottom"
                 materialDesign:HintAssist.Hint="Marca"
+                materialDesign:TextFieldAssist.HasClearButton="True"
                 Margin="15"
                 ItemsSource="{Binding Path=Brands}"
-                SelectedItem="{Binding Path=SelectedBrand}">
+                SelectedItem="{Binding Path=SelectedBrand}"
+                DisplayMemberPath="Name">
             </ComboBox>
         </StackPanel>
     </UniformGrid>

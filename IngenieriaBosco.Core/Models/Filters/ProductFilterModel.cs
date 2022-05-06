@@ -9,34 +9,35 @@ namespace IngenieriaBosco.Core.Models.Filters
 {
     public class ProductFilterModel : FilterModel
     {
-        private string? selectedCategory;
+        private CategoryModel? selectedCategory;
         public string? ProductDescription { get; set; }
         public string? ProductCode { get; set; }
-        public string? SelectedCategory 
+        public CategoryModel? SelectedCategory 
         {
             get => selectedCategory;
             set
             {
-                SetProperty(ref selectedCategory, value);
-                Brands = new ();
+                if(SetProperty(ref selectedCategory, value))
+                    SetBrands(selectedCategory);
             }
         }
-        public string? SelectedBrand { get; set; }
+        public BrandModel? SelectedBrand { get; set; }
         public List<BrandModel> Brands { get; set; }
         public List<CategoryModel> Categories { get; set; }
         public ProductFilterModel()
         {
             Brands = new();
             Categories = new();
+            SetCategories();
         }
         public override bool Filter(object o)
         {
-            if (o == null) return false;
+            if (o is null || SelectedCategory is null) return false;
             return o is ProductModel p
                 && Validate(ProductDescription, p.Description)
                 && Validate(ProductCode, p.Code)
-                && Validate(SelectedCategory, p.CategoryName)
-                && Validate(SelectedBrand, p.BrandName);
+                && Validate(SelectedCategory.Name, p.Category.Name)
+                && (SelectedBrand != null && Validate(SelectedBrand.Name, p.Brand.Name));
         }
 
         private static bool Validate(string? fst, string? scd)
@@ -44,6 +45,17 @@ namespace IngenieriaBosco.Core.Models.Filters
             if(fst == null || scd == null) return true;
             if(fst == string.Empty) return true;
             return scd.Contains(fst);
+        }
+        private async void SetBrands(CategoryModel? category)
+        {
+            if (category is null) return;
+            Brands = new(await DBBrand.SelectByCategoryId(category));
+            OnPropertyChanged(nameof(Brands));
+        }
+        private async void SetCategories()
+        {
+            Categories = new(await DBCategory.SelectAll());
+            OnPropertyChanged(nameof(Categories));
         }
     }
 }

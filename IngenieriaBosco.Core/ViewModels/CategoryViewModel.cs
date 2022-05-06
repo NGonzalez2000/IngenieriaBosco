@@ -12,6 +12,7 @@ namespace IngenieriaBosco.Core.ViewModels
         private string? categoryName;
         private string? brandName;
         private string? providerName;
+        private List<ProviderModel>? providers;
 
         public string? CategoryName
         {
@@ -51,15 +52,22 @@ namespace IngenieriaBosco.Core.ViewModels
         public ICommand NewBrandCommand => new RelayCommand(_ => NewBrand_Execute());
         public ICommand EditBrandCommand => new RelayCommand(_ => EditBrand_Execute());
         public ICommand DeleteBrandCommand => new RelayCommand(_ => DeleteBrand_Execute());
+        public ICommand NewProviderCommand => new RelayCommand(_ => NewProvider_Execute());
+        public ICommand DeleteProviderCommand => new RelayCommand(_ => DeleteProvider_Execute());
         public CategoryViewModel(ISnackbarMessageQueue snackbarMessageQueue) : base(snackbarMessageQueue)
         {
 
         }
         public async override void Load()
         {
+            providers = new(await DBProvider.SelectAll());
+
             CategoryList = new(await DBCategory.SelectAll());
             BrandList = new();
             ProviderList = new();
+
+            CategoryList.OnSelectionChanged = OnCategorySelectionChanged;
+            BrandList.OnSelectionChanged = OnBrandSelectionChanged;
 
             OnPropertyChanged(nameof(CategoryList));
             OnPropertyChanged(nameof(BrandList));
@@ -84,7 +92,7 @@ namespace IngenieriaBosco.Core.ViewModels
             }
             catch (System.Exception ex)
             {
-                await AcceptCall("Error al insertar la Categoría\n."
+                await AcceptCall("Error al insertar la Categoría\n\n."
                                   + ex.GetBaseException().Message,
                                   DialogIdentifiers.Category_Identifier);
                 return;
@@ -96,7 +104,7 @@ namespace IngenieriaBosco.Core.ViewModels
             }
             catch (System.Exception ex)
             {
-                await AcceptCall("No se pudo cargar la Identidad de la categoría, la pagina se actualizará.\n"
+                await AcceptCall("No se pudo cargar la Identidad de la categoría, la pagina se actualizará.\n\n"
                                   + ex.GetBaseException().Message,
                                   DialogIdentifiers.Category_Identifier);
                 Load();
@@ -105,7 +113,7 @@ namespace IngenieriaBosco.Core.ViewModels
             CategoryList!.Insert(categoryModel);
 
 
-            ShowSnackbarMessage($"Categoría agregada con éxito");
+            ShowSnackbarMessage("Categoría agregada con éxito");
         }
         private async void EditCategory_Execute()
         {
@@ -121,7 +129,7 @@ namespace IngenieriaBosco.Core.ViewModels
             }
             catch (System.Exception ex)
             {
-                await AcceptCall("Error al editar la Categoría\n."
+                await AcceptCall("Error al editar la Categoría\n\n."
                                   + ex.GetBaseException().Message,
                                   DialogIdentifiers.Category_Identifier);
                 return;
@@ -153,16 +161,175 @@ namespace IngenieriaBosco.Core.ViewModels
             CategoryList.Delete(CategoryList.SelectedItem);
             ShowSnackbarMessage("Categoría eliminada con éxito");
         }
+
         private async void NewBrand_Execute()
         {
+            if (CategoryList!.SelectedItem == null) return;
+            BrandDialogModel dialogModel = new();
+            BrandModel? brandModel = await dialogModel.NewBrand();
 
+            if (brandModel == null) return;
+
+            //insert brand
+            try
+            {
+                await DBBrand.Insert(brandModel,CategoryList!.SelectedItem!.Id);
+            }
+            catch (System.Exception ex)
+            {
+                await AcceptCall("Error al insertar la Marca\n\n."
+                                 + ex.GetBaseException().Message,
+                                 DialogIdentifiers.Category_Identifier);
+                return;
+            }
+
+            //get id
+            try
+            {
+                brandModel.Id = await DBAccess.GetId("Brands");
+            }
+            catch (System.Exception ex)
+            {
+                await AcceptCall("No se pudo cargar la Identidad de la marca, la pagina se actualizará.\n\n"
+                                  + ex.GetBaseException().Message,
+                                  DialogIdentifiers.Category_Identifier);
+                Load();
+            }
+            BrandList!.Insert(brandModel);
+            ShowSnackbarMessage("Marca agregada con éxito");
         }
         private async void EditBrand_Execute()
         {
+            //generar script de limpieza de base de datos
+            if(BrandList!.SelectedItem == null) return;
+
+            BrandDialogModel dialogModel = new(BrandList.SelectedItem);
+            BrandModel? brandModel = await dialogModel.EditBrand();
+
+            if(brandModel == null) return;
+
+            try
+            {
+                await DBBrand.Update(brandModel);
+            }
+            catch (System.Exception ex)
+            {
+                await AcceptCall("Error al editar la Marca\n\n."
+                                  + ex.GetBaseException().Message,
+                                  DialogIdentifiers.Category_Identifier);
+                return;
+            }
+
+            BrandList.Edit(BrandList.SelectedItem, brandModel);
+            ShowSnackbarMessage("Marca editada con éxito");
 
         }
         private async void DeleteBrand_Execute()
-        { 
+        {
+            if (BrandList == null || BrandList.SelectedItem == null) return;
+            bool response = await AcceptCancelCall($"Seguro que desea eliminar a la marca {BrandList.SelectedItem.Name}.\n\n",
+                                                   DialogIdentifiers.Category_Identifier);
+            if (!response) return;
+
+            try
+            {
+                await DBBrand.Delete(BrandList.SelectedItem);
+            }
+            catch (System.Exception ex)
+            {
+                await AcceptCall("Error al eliminar la Marca\n."
+                                  + ex.GetBaseException().Message,
+                                  DialogIdentifiers.Category_Identifier);
+                return;
+            }
+
+            BrandList.Delete(BrandList.SelectedItem);
+            ShowSnackbarMessage("Marca eliminada con éxito");
+        }
+
+        private async void NewProvider_Execute()
+        {
+            if (BrandList!.SelectedItem is null) return;
+
+            List<ProviderModel> _providers = new (providers!);
+
+            foreach(ProviderModel provider in ProviderList!.Collection)
+            {
+                int indx = _providers.FindIndex(p => p.Id == provider.Id);
+                _providers.RemoveAt(indx);
+            }
+                //_providers.Remove(provider);
+
+            SelectProviderDialogModel selectProviderDialogModel = new(_providers);
+            
+            ProviderModel? providerModel = await selectProviderDialogModel.GetProvider();
+
+            if (providerModel is null) return;
+
+            try
+            {
+                await DBBrandProviders.Insert(BrandList!.SelectedItem, providerModel);
+            }
+            catch (System.Exception ex)
+            {
+                await AcceptCall($"Error al agregar el proveedor a la marca {BrandList.SelectedItem.Name}\n\n" +
+                                   ex.GetBaseException().Message,
+                                   DialogIdentifiers.Category_Identifier);
+                return;
+            }
+
+            ProviderList.Insert(providerModel);
+
+            ShowSnackbarMessage($"El proveedor de {BrandList.SelectedItem.Name} se ha agregado con éxito");
+        }       
+        private async void DeleteProvider_Execute()
+        {
+            if(ProviderList!.SelectedItem is null || BrandList!.SelectedItem is null) return;
+
+            bool respone = await AcceptCancelCall($"Seguro que desea sacarle el proveedor {ProviderList.SelectedItem.Name} a la marca {BrandList.SelectedItem.Name}?",
+                                                    DialogIdentifiers.Category_Identifier);
+
+            if (!respone) return;
+
+            try
+            {
+                await DBBrandProviders.Delete_Provider(BrandList.SelectedItem, ProviderList.SelectedItem);
+            }
+            catch (System.Exception ex)
+            {
+                await AcceptCall("Error al quitar el proveedor\n\n" + ex.GetBaseException().Message,
+                                  DialogIdentifiers.Category_Identifier);
+                return;
+            }
+            ProviderList.Delete(ProviderList.SelectedItem);
+
+            ShowSnackbarMessage("Proveedor quitado con éxito");
+        }
+
+        private async void OnCategorySelectionChanged(object? c)
+        {
+            if (c == null) {
+                BrandList!.Collection = new();
+                BrandList.SelectedItem = null;
+            }
+            else if(c is CategoryModel selectedCategory)
+            {
+                BrandList!.Collection = new(await DBBrand.SelectByCategoryId(selectedCategory));
+            }
+            OnPropertyChanged(nameof(BrandList));
+        }
+        private async void OnBrandSelectionChanged(object? b)
+        {
+            if (b is null)
+            {
+                ProviderList!.Collection = new();
+                OnPropertyChanged(nameof(ProviderList));
+                return;
+            }
+
+            ProviderList!.Collection = new(await DBBrandProviders.SelectByBrand((BrandModel)b));
+
+            OnPropertyChanged(nameof(ProviderList));
         }
     }
 }

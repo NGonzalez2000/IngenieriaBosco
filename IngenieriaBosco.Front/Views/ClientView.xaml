@@ -1,0 +1,257 @@
+﻿<UserControl x:Class="IngenieriaBosco.Front.Views.ClientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IngenieriaBosco.Front.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:filters="clr-namespace:IngenieriaBosco.Front.Dialogs.Filters" xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:CuilConverter x:Key="CuilConverter"/>
+    </UserControl.Resources>
+
+    <materialDesign:DialogHost
+        Identifier="ClientViewDialog"
+        DialogTheme="Inherit">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <UniformGrid
+                Columns="3">
+
+                <!--    Column 1  Buttons  -->
+                <StackPanel HorizontalAlignment="Left">
+                    <Button
+                        Margin="20 30 20 20"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Content="NUEVO CLIENTE"
+                        Command="{Binding Path=NewClientCommand}"/>
+                    
+
+                </StackPanel>
+
+
+                <!-- Column 2 Selected Client -->
+                <StackPanel>
+                    <UniformGrid Columns="2">
+                        <TextBlock
+                            Text="CLIENTE SELECCIONADO"
+                            Margin="0 20 0 0"
+                            FontSize="{DynamicResource HeaderFontSize}"
+                            Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                            <Button
+                                ToolTip="EDITAR"
+                                Command="{Binding Path=EditClientCommand}"
+                                Style="{StaticResource MaterialDesignIconButton}">
+
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Pencil"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                            <Button
+                                ToolTip="ELIMINAR"
+                                Command="{Binding Path=DeleteClientCommand}"
+                                Style="{StaticResource MaterialDesignIconButton}">
+
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Delete"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <Separator
+                        Background="{DynamicResource PrimaryHueMidBrush}"
+                        Height="2"/>
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="Nombre:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                        <TextBlock
+                            Text="{Binding Path=ClientList.SelectedItem.FirstName}"
+                            FontSize="{DynamicResource GeneralFontSize}"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="Apellido:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                        <TextBlock
+                            Text="{Binding Path=ClientList.SelectedItem.LastName}"
+                            FontSize="{DynamicResource GeneralFontSize}"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="CUIL:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                        <TextBlock
+                            Text="{Binding Path=ClientList.SelectedItem.CUIL, Converter={StaticResource CuilConverter}}"
+                            FontSize="{DynamicResource GeneralFontSize}"/>
+                    </StackPanel>
+                </StackPanel>
+
+
+                <!--  Column 3 OrderBy & Filter  -->
+                <!--<StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+
+                    <materialDesign:PopupBox
+                        x:Name="SortPopupBox"
+                        PlacementMode="LeftAndAlignMiddles"
+                        StaysOpen="True"
+                        Margin="30 0">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="Sort"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:ProductSort DataContext="{Binding ProductSort}"/>
+                            <Button
+                            Content="ORDENAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=SortCommand}"
+                            Click="Sort_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+
+                    <materialDesign:PopupBox
+                    x:Name="FilterPopupBox"
+                    PlacementMode="LeftAndAlignMiddles"
+                    StaysOpen="True">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="FilterOutline"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:ProductFilter DataContext="{Binding ProductFilter}"/>
+                            <Button
+                            Content="FILTRAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=FilterCommand}"
+                            Click="Filter_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+                </StackPanel>-->
+
+
+            </UniformGrid>
+
+            <StackPanel
+                Grid.Row="1"
+                Margin="0 30">
+                <Separator
+                    Height="2"
+                    Background="{DynamicResource PrimaryHueDarkBrush}"/>
+                <ListView
+                    ItemsSource="{Binding Path=ClientList.Collection}"
+                    SelectedItem="{Binding Path=ClientList.SelectedItem}">
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn
+                                Header="Nombre">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=FirstName}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="Apellido">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=LastName}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="CUIL">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=CUIL}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="Teléfono">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=PhoneNumber}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="E-Mail">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl
+                                            ItemsSource="{Binding Path=Emails}"
+                                            Margin="0 -3 0 0">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Margin="0 0 0 5"
+                                                        Text="{Binding Path=Email}"
+                                                        FontSize="{DynamicResource GridFontSize}"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </materialDesign:DialogHost>
+</UserControl>

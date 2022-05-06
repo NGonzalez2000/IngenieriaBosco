@@ -11,17 +11,17 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="Message" TextWrapping="Wrap" MaxWidth="350" Margin="20 30 20 20"/>
+        <TextBlock x:Name="Message" TextWrapping="Wrap" MaxWidth="350" Margin="20 30 20 20" FontSize="{DynamicResource GeneralFontSize}"/>
         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
-            <Button Margin="0  0 10 0" Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
+            <Button Margin="0  0 10 0" Command="{x:Static wpf:DialogHost.CloseDialogCommand}" FontSize="{DynamicResource ButtonFontSize}">
                 <Button.CommandParameter>
                     <system:Boolean>True</system:Boolean>
                 </Button.CommandParameter> Aceptar
             </Button>
-            <Button Margin="10 0 0 0" Command="{x:Static wpf:DialogHost.CloseDialogCommand}">
+            <Button Margin="10 0 0 0" Command="{x:Static wpf:DialogHost.CloseDialogCommand}" FontSize="{DynamicResource ButtonFontSize}">
                 <Button.CommandParameter>
                     <system:Boolean>False</system:Boolean>
                 </Button.CommandParameter> Cancelar

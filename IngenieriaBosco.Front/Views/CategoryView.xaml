@@ -14,7 +14,7 @@
 
     <materialDesign:DialogHost
         DialogTheme="Inherit"
-        Identifier="CategoryDialog">
+        Identifier="CategoryViewDialog">
 
         <UniformGrid
         Columns="3">
@@ -31,18 +31,19 @@
 
                 <UniformGrid Columns="2">
                     <TextBox 
-                    HorizontalAlignment="Left"
-                    Text="{Binding Path=CategoryName, UpdateSourceTrigger=PropertyChanged}"
-                    DockPanel.Dock="Left"
-                    MinWidth="150"
-                    MaxWidth="250"
-                    Margin="16, 12"
-                    materialDesign:HintAssist.Hint="Categoría"
-                    materialDesign:HintAssist.IsFloating="True"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                    materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+                        CharacterCasing="Upper"
+                        HorizontalAlignment="Left"
+                        Text="{Binding Path=CategoryName, UpdateSourceTrigger=PropertyChanged}"
+                        DockPanel.Dock="Left"
+                        MinWidth="150"
+                        MaxWidth="250"
+                        Margin="16, 12"
+                        materialDesign:HintAssist.Hint="Categoría"
+                        materialDesign:HintAssist.IsFloating="True"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                        materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
                     <StackPanel
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
@@ -131,18 +132,20 @@
                     </Grid.RowDefinitions>
                     <UniformGrid Columns="2">
                         <TextBox 
-                                HorizontalAlignment="Left"
-                                Text="{Binding Path=BrandName, UpdateSourceTrigger=PropertyChanged}"
-                                DockPanel.Dock="Left"
-                                MinWidth="150"
-                                MaxWidth="250"
-                                Margin="16, 12"
-                                materialDesign:HintAssist.Hint="Marca"
-                                materialDesign:HintAssist.IsFloating="True"
-                                materialDesign:TextFieldAssist.HasClearButton="True"
-                                materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-                                materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                                materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+                            HorizontalAlignment="Left"
+                                
+                            Text="{Binding Path=BrandName, UpdateSourceTrigger=PropertyChanged}"
+                            DockPanel.Dock="Left"
+                            CharacterCasing="Upper"
+                            MinWidth="150"
+                            MaxWidth="250"
+                            Margin="16, 12"
+                            materialDesign:HintAssist.Hint="Marca"
+                            materialDesign:HintAssist.IsFloating="True"
+                            materialDesign:TextFieldAssist.HasClearButton="True"
+                            materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                            materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                            materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
 
 
                         <StackPanel
@@ -151,7 +154,8 @@
 
                             <Button
                                 ToolTip="CREAR"
-                                Style="{StaticResource MaterialDesignIconButton}">
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                Command="{Binding Path=NewBrandCommand}">
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="Add"
                                     Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
@@ -160,7 +164,8 @@
 
                             <Button
                                 ToolTip="EDITAR"
-                                Style="{StaticResource MaterialDesignIconButton}">
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                Command="{Binding Path=EditBrandCommand}">
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="Pencil"
                                     Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
@@ -168,7 +173,8 @@
                             </Button>
                             <Button
                                 ToolTip="ELIMINAR"
-                                Style="{StaticResource MaterialDesignIconButton}">
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                Command="{Binding Path=DeleteBrandCommand}">
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="Delete"
                                         Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
@@ -239,29 +245,30 @@
 
 
                 <UniformGrid Columns="2">
-                        <TextBox 
-                    HorizontalAlignment="Left"
-                    Text="{Binding Path=ProviderName, UpdateSourceTrigger=PropertyChanged}"
-                    DockPanel.Dock="Left"
-                    MinWidth="150"
-                    MaxWidth="250"
-                    Margin="16, 12"
-                    materialDesign:HintAssist.Hint="Proveedor"
-                    materialDesign:HintAssist.IsFloating="True"
-                    materialDesign:TextFieldAssist.HasClearButton="True"
-                    materialDesign:TextFieldAssist.HasOutlinedTextField="True"
-                    materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
-                    materialDesign:TextFieldAssist.TextFieldCornerRadius="4"
-                    />
-                        
+                    <TextBox 
+                        CharacterCasing="Upper"
+                        HorizontalAlignment="Left"
+                        Text="{Binding Path=ProviderName, UpdateSourceTrigger=PropertyChanged}"
+                        DockPanel.Dock="Left"
+                        MinWidth="150"
+                        MaxWidth="250"
+                        Margin="16, 12"
+                        materialDesign:HintAssist.Hint="Proveedor"
+                        materialDesign:HintAssist.IsFloating="True"
+                        materialDesign:TextFieldAssist.HasClearButton="True"
+                        materialDesign:TextFieldAssist.HasOutlinedTextField="True"
+                        materialDesign:TextFieldAssist.DecorationVisibility="Collapsed"
+                        materialDesign:TextFieldAssist.TextFieldCornerRadius="4"/>
+
 
                     <StackPanel
                     Orientation="Horizontal"
                     HorizontalAlignment="Right">
 
                         <Button
-                        ToolTip="AGREGAR"
-                        Style="{StaticResource MaterialDesignIconButton}">
+                            ToolTip="AGREGAR"
+                            Command="{Binding Path=NewProviderCommand}"
+                            Style="{StaticResource MaterialDesignIconButton}">
                             <Button.Content>
                                 <materialDesign:PackIcon Kind="Add"
                                     Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
@@ -270,8 +277,9 @@
 
 
                         <Button
-                        ToolTip="ELIMINAR"
-                        Style="{StaticResource MaterialDesignIconButton}">
+                            ToolTip="ELIMINAR"
+                            Command="{Binding Path=DeleteProviderCommand}"
+                            Style="{StaticResource MaterialDesignIconButton}">
                             <Button.Content>
                                 <materialDesign:PackIcon Kind="Delete"
                                     Foreground="{DynamicResource SecondaryHueDarkBrush}"/>

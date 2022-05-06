@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[ProviderEmails]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[ProviderId] INT FOREIGN KEY REFERENCES [dbo].[Providers](Id) NOT NULL,
+	[Email] NVARCHAR(100) NOT NULL
+)

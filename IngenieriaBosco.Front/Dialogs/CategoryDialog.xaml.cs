@@ -25,11 +25,5 @@ namespace IngenieriaBosco.Front.Dialogs
             InitializeComponent();
             HeaderTextBlock.Text = header;
         }
-
-        private void TrueButton_Click(object sender, RoutedEventArgs e)
-        {
-            BindingExpression binding = NameTextBox.GetBindingExpression(TextBox.TextProperty);
-            binding.UpdateSource();
-        }
     }
 }

@@ -33,7 +33,7 @@
         </TextBox>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="20">
-            <Button x:Name="TrueButton" Content="ACEPTAR" FontSize="{DynamicResource ButtonFontSize}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Click="TrueButton_Click" Margin="20 0">
+            <Button x:Name="TrueButton" Content="ACEPTAR" FontSize="{DynamicResource ButtonFontSize}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Margin="20 0">
                 <Button.CommandParameter>
                     <system:Boolean>True</system:Boolean>
                 </Button.CommandParameter>

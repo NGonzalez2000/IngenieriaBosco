@@ -1,0 +1,196 @@
+﻿<UserControl x:Class="IngenieriaBosco.Front.Views.ProviderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IngenieriaBosco.Front.Views"
+             xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:CuilConverter x:Key="CUILConverter"/>
+    </UserControl.Resources>
+    <materialDesign:DialogHost
+        Identifier="ProviderViewDialog"
+        DialogTheme="Inherit">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <UniformGrid
+                Columns="3">
+
+                <!--    Column 1  Buttons  -->
+                <StackPanel HorizontalAlignment="Left">
+                    <Button
+                        Margin="20 30 20 20"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Content="NUEVO PROVEEDOR"
+                        Command="{Binding Path=NewProviderCommand}"/>
+
+                </StackPanel>
+
+
+                <!-- Column 2 Selected Provider -->
+                <StackPanel>
+                    <UniformGrid Columns="2">
+                        <TextBlock
+                            Text="PROVEEDOR SELECCIONADO"
+                            Margin="0 20 0 0"
+                            FontSize="{DynamicResource HeaderFontSize}"
+                            Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                            <Button
+                                ToolTip="EDITAR"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                Command="{Binding Path=EditProviderCommand}">
+
+                                <Button.Content>
+                                    <materialDesign:PackIcon 
+                                        Kind="Pencil"
+                                        Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                            <Button
+                                ToolTip="ELIMINAR"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                Command="{Binding Path=DeleteProviderCommand}">
+
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Delete"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <Separator
+                        Background="{DynamicResource PrimaryHueMidBrush}"
+                        Height="2"/>
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="Nombre:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                        <TextBlock
+                            Text="{Binding Path=ProviderList.SelectedItem.Name}"
+                            FontSize="{DynamicResource GeneralFontSize}"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="CUIT:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                        <TextBlock
+                            Text="{Binding Path=ProviderList.SelectedItem.CUIT, Converter={StaticResource CUILConverter}}"
+                            FontSize="{DynamicResource GeneralFontSize}"/>
+                    </StackPanel>
+                </StackPanel>
+
+
+                <!--  Column 3 OrderBy & Filter  -->
+                
+
+
+
+            </UniformGrid>
+            <!--List Of Providers-->
+            <StackPanel
+                Grid.Row="1"
+                Margin="0 30">
+                <Separator
+                    Height="2"
+                    Background="{DynamicResource PrimaryHueDarkBrush}"/>
+                <ListView
+                    ItemsSource="{Binding Path=ProviderList.Collection}"
+                    SelectedItem="{Binding Path=ProviderList.SelectedItem}">
+                    <ListView.View>
+                        <GridView>
+                            <!-- Name -->
+                            <GridViewColumn
+                                Header="Nombre">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=Name}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            <!-- CUIT -->
+                            <GridViewColumn
+                                Header="CUIT">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=CUIT, Converter={StaticResource CUILConverter}}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            <!-- PhoneNumber -->
+                            <GridViewColumn
+                                Header="Teléfono">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=PhoneNumber}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!-- Emails -->
+                            <GridViewColumn
+                                Header="E-Mail">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ItemsControl
+                                            ItemsSource="{Binding Path=Emails}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock
+                                                        Text="{Binding Path=Email}"
+                                                        FontSize="{DynamicResource GridFontSize}"/>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <!-- Web -->
+                            <GridViewColumn
+                                Header="Página Web">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock>
+                                            <Hyperlink NavigateUri="{Binding Path=Web}" RequestNavigate="Hyperlink_RequestNavigate" FontSize="{DynamicResource GridFontSize}">
+                                                <TextBlock Text="{Binding Path=Web}" FontSize="{DynamicResource GridFontSize}"/>
+                                            </Hyperlink>
+                                    </TextBlock>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </materialDesign:DialogHost>
+</UserControl>

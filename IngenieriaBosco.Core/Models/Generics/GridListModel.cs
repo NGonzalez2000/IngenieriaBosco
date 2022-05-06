@@ -23,7 +23,7 @@ namespace IngenieriaBosco.Core.Models.Generics
             get { return selectedItem; }
             set
             {
-                if(SetProperty(ref selectedItem, value) && selectedItem != null && OnSelectionChanged != null)
+                if(SetProperty(ref selectedItem, value) && OnSelectionChanged != null)
                 {
                     OnSelectionChanged!.Invoke(selectedItem);
                 }
@@ -64,6 +64,6 @@ namespace IngenieriaBosco.Core.Models.Generics
         public void Delete(T item)
             => Collection.Remove(item);
 
-        public Action<T>? OnSelectionChanged;
+        public Action<T?>? OnSelectionChanged;
     }
 }

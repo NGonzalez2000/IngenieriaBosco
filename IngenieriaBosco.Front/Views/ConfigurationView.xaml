@@ -32,7 +32,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="models:ItemModel">
                     <TextBlock Text="{Binding Name}" Margin="30 0" AutomationProperties.AutomationId="ItemPage"
-                               Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                               Foreground="{DynamicResource SecondaryHueMidBrush}"
+                               FontSize="{DynamicResource ButtonFontSize}"/>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

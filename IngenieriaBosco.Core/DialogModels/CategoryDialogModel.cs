@@ -32,7 +32,7 @@ namespace IngenieriaBosco.Core.DialogModels
             if (result) return Category;
             return null;
         }
-        public void ClosingEventHandler_New(object sender, DialogClosingEventArgs eventArgs)
+        public override void ClosingEventHandler_New(object sender, DialogClosingEventArgs eventArgs)
         {
             if (eventArgs.Parameter is bool parameter &&
                     parameter == false) return;
@@ -42,7 +42,7 @@ namespace IngenieriaBosco.Core.DialogModels
 
             OnPropertyChanged(nameof(Category));
         }
-        public void ClosingEventHandler_Edit(object sender, DialogClosingEventArgs eventArgs)
+        public override void ClosingEventHandler_Edit(object sender, DialogClosingEventArgs eventArgs)
         {
             if (eventArgs.Parameter is bool parameter &&
                     parameter == false) return;

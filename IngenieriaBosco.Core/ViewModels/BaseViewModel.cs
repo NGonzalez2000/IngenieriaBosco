@@ -1,4 +1,5 @@
-﻿using IngenieriaBosco.Front.Dialogs.MessageDialog;
+﻿using IngenieriaBosco.Core.DialogModels;
+using IngenieriaBosco.Front.Dialogs.MessageDialog;
 using MaterialDesignThemes.Wpf;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace IngenieriaBosco.Core.ViewModels
                 snackbarMessageQueue?.Enqueue(Message);
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
-        protected static async Task<bool> AcceptCancelCall(string message, string Dialog = "RootDialog")
+        protected static async Task<bool> AcceptCancelCall(string message, string Dialog = DialogIdentifiers.MainWindow_Identifier)
         {
             if (!DialogHost.IsDialogOpen(Dialog))
             {
@@ -31,7 +32,7 @@ namespace IngenieriaBosco.Core.ViewModels
             return false;
 
         }
-        protected static async Task AcceptCall(string message, string dialogIdentifier = "RootDialog")
+        protected static async Task AcceptCall(string message, string dialogIdentifier = DialogIdentifiers.MainWindow_Identifier)
         {
             if (!DialogHost.IsDialogOpen(dialogIdentifier))
             {

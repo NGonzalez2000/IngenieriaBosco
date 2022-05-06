@@ -1,0 +1,4 @@
+﻿CREATE TABLE [dbo].[Clents]
+(
+	[Id] INT NOT NULL PRIMARY KEY
+)
