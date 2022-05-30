@@ -4,6 +4,7 @@ using IngenieriaBosco.Core.ViewModels;
 using IngenieriaBosco.Interface;
 using MaterialDesignThemes.Wpf;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,6 +50,7 @@ namespace IngenieriaBosco
                 FixConnection(sqlException);
 
             AddDynamicResources();
+            Closing += ClosingEvent;
         }
 
         
@@ -92,6 +94,11 @@ namespace IngenieriaBosco
             Application.Current.Resources["ButtonFontSize"] = GeneralSettings.Default.ButtonFontSize;
             Application.Current.Resources["GeneralFontSize"] = GeneralSettings.Default.GeneralFontSize;
             Application.Current.Resources["GridFontSize"] = GeneralSettings.Default.GridFontSize;
+        }
+        
+        private void ClosingEvent(object? sender, CancelEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

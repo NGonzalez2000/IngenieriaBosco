@@ -13,7 +13,7 @@
         <StackPanel>
             <TextBox
                 materialDesign:HintAssist.Hint ="Código"
-                Text="{Binding Path=ProductDescription}"
+                Text="{Binding Path=ProductCode}"
                 Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                 CharacterCasing="Upper"
                 MinWidth="150"

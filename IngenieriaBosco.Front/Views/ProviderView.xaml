@@ -81,10 +81,12 @@
                         <TextBlock
                             Text="Nombre:   "
                             FontFamily="Bold"
-                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
                         <TextBlock
                             Text="{Binding Path=ProviderList.SelectedItem.Name}"
-                            FontSize="{DynamicResource GeneralFontSize}"/>
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel
@@ -93,27 +95,78 @@
                         <TextBlock
                             Text="CUIT:   "
                             FontFamily="Bold"
-                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
                         <TextBlock
                             Text="{Binding Path=ProviderList.SelectedItem.CUIT, Converter={StaticResource CUILConverter}}"
-                            FontSize="{DynamicResource GeneralFontSize}"/>
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
 
 
                 <!--  Column 3 OrderBy & Filter  -->
-                
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+
+                    <materialDesign:PopupBox
+                        x:Name="SortPopupBox"
+                        PlacementMode="LeftAndAlignMiddles"
+                        StaysOpen="True"
+                        Margin="30 0">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="Sort"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:SortUserControl DataContext="{Binding ProviderSort}"/>
+                            <Button
+                            Content="ORDENAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=SortCommand}"
+                            Click="Sort_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+
+                    <materialDesign:PopupBox
+                    x:Name="FilterPopupBox"
+                    PlacementMode="LeftAndAlignMiddles"
+                    StaysOpen="True">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="FilterOutline"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:ProviderFilter DataContext="{Binding ProviderFilter}"/>
+                            <Button
+                            Content="FILTRAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=FilterCommand}"
+                            Click="Filter_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+                </StackPanel>
 
 
 
             </UniformGrid>
             <!--List Of Providers-->
-            <StackPanel
+            <Border
+                
                 Grid.Row="1"
-                Margin="0 30">
-                <Separator
-                    Height="2"
-                    Background="{DynamicResource PrimaryHueDarkBrush}"/>
+                Margin="0 30"
+                BorderThickness="0 2 0 0"
+                BorderBrush="{DynamicResource PrimaryHueDarkBrush}">
                 <ListView
                     ItemsSource="{Binding Path=ProviderList.Collection}"
                     SelectedItem="{Binding Path=ProviderList.SelectedItem}">
@@ -190,7 +243,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </StackPanel>
+            </Border>
         </Grid>
     </materialDesign:DialogHost>
 </UserControl>

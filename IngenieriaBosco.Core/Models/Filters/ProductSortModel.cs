@@ -17,9 +17,9 @@ namespace IngenieriaBosco.Core.Models.Filters
 
         private string ParseSortBy()
         {
-            if (SelectedSortBy == null || SelectedSortBy == SortByOptions[0]) return "Code";
+            if (SelectedSortBy == null || SelectedSortBy == SortByOptions![0]) return "Code";
             if (SelectedSortBy == SortByOptions[1]) return "Description";
-            if (SelectedSortBy == SortByOptions[2]) return "BrandName";
+            if (SelectedSortBy == SortByOptions[2]) return "Brand.Name";
             return "Stock";
         }
         

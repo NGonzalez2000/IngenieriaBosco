@@ -29,15 +29,20 @@ namespace IngenieriaBosco.Core.Models.Filters
             Brands = new();
             Categories = new();
             SetCategories();
+            
         }
         public override bool Filter(object o)
         {
             if (o is null || SelectedCategory is null) return false;
-            return o is ProductModel p
-                && Validate(ProductDescription, p.Description)
-                && Validate(ProductCode, p.Code)
-                && Validate(SelectedCategory.Name, p.Category.Name)
-                && (SelectedBrand != null && Validate(SelectedBrand.Name, p.Brand.Name));
+            bool ret = true;
+            if (o is ProductModel p)
+            {
+                if (!string.IsNullOrEmpty(ProductDescription)) ret &= Validate(ProductDescription, p.Description);
+                if (!string.IsNullOrEmpty(ProductCode)) ret &= Validate(ProductCode, p.Code);
+                if (SelectedCategory != null) ret &= Validate(SelectedCategory.Name, p.Category!.Name);
+                if (SelectedBrand != null) ret &= Validate(SelectedBrand.Name, p.Brand!.Name);
+            }
+            return ret;
         }
 
         private static bool Validate(string? fst, string? scd)
@@ -55,6 +60,8 @@ namespace IngenieriaBosco.Core.Models.Filters
         private async void SetCategories()
         {
             Categories = new(await DBCategory.SelectAll());
+            if (Categories.Count > 0)
+                SelectedCategory = Categories[0];
             OnPropertyChanged(nameof(Categories));
         }
     }

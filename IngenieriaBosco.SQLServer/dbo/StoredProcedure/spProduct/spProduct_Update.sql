@@ -23,7 +23,7 @@ UPDATE [dbo].[Products]
 		[RetailPrice] = @RetailPrice,
 		[WholesalerPrice] = @WholesalerPrice,
 		[Stock] = @Stock,
-		[WariningStock] = @WarningStock
+		[WarningStock] = @WarningStock
 	WHERE [Id] = @Id
 
 END

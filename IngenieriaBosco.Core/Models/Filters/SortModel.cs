@@ -10,7 +10,7 @@ namespace IngenieriaBosco.Core.Models.Filters
     public abstract class SortModel : INotify
     {
         public string? SelectedSortBy { get; set; }
-        public List<string> SortByOptions { get; set; }
+        public List<string>? SortByOptions { get; set; }
         public bool IsAscending { get; set; }
         public abstract SortDescription OrderBy();
     }

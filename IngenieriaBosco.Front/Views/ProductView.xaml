@@ -6,10 +6,13 @@
              xmlns:local="clr-namespace:IngenieriaBosco.Front.Views"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:filters="clr-namespace:IngenieriaBosco.Front.Dialogs.Filters"
+             xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
-    
+
+    <UserControl.Resources>
+        <converters:ESARConverter x:Key="MoneyConverter"/>
+    </UserControl.Resources>
     <materialDesign:DialogHost
         Identifier="ProductViewDialog"
         DialogTheme="Inherit">
@@ -33,6 +36,7 @@
                     <Button
                         Margin="20"
                         FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=ImportProductCommand}"
                         Content="IMPORTAR PRODUCTOS"/>
 
                 </StackPanel>
@@ -51,6 +55,7 @@
                             HorizontalAlignment="Right">
                             <Button
                                 ToolTip="EDITAR"
+                                Command="{Binding Path=EditProductCommand}"
                                 Style="{StaticResource MaterialDesignIconButton}">
                                 
                                 <Button.Content>
@@ -61,6 +66,7 @@
 
                             <Button
                                 ToolTip="ELIMINAR"
+                                Command="{Binding Path=DeleteProductCommand}"
                                 Style="{StaticResource MaterialDesignIconButton}">
 
                                 <Button.Content>
@@ -81,10 +87,12 @@
                         <TextBlock
                             Text="Código:   "
                             FontFamily="Bold"
-                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
                         <TextBlock
                             Text="{Binding Path=ProductList.SelectedItem.Code}"
-                            FontSize="{DynamicResource GeneralFontSize}"/>
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
                     
                     <StackPanel
@@ -93,10 +101,12 @@
                         <TextBlock
                             Text="Descripción:   "
                             FontFamily="Bold"
-                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
                         <TextBlock
                             Text="{Binding Path=ProductList.SelectedItem.Description}"
-                            FontSize="{DynamicResource GeneralFontSize}"/>
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
                 
@@ -120,7 +130,7 @@
                             Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <filters:ProductSort DataContext="{Binding ProductSort}"/>
+                            <filters:SortUserControl DataContext="{Binding ProductSort}"/>
                             <Button
                             Content="ORDENAR"
                             HorizontalContentAlignment="Center"
@@ -156,12 +166,11 @@
                 
             </UniformGrid>
 
-            <StackPanel
+            <Border
                 Grid.Row="1"
-                Margin="0 30">
-                <Separator
-                    Height="2"
-                    Background="{DynamicResource PrimaryHueDarkBrush}"/>
+                Margin="0 30"
+                BorderThickness="0 2 0 0"
+                BorderBrush="{DynamicResource PrimaryHueDarkBrush}">
                 <ListView
                     ItemsSource="{Binding Path=ProductList.Collection}"
                     SelectedItem="{Binding Path=ProductList.SelectedItem}">
@@ -228,7 +237,7 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding Path=ListingPrice}"
+                                            Text="{Binding Path=ListingPrice,Converter={StaticResource MoneyConverter}}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -239,7 +248,7 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding Path=RetailPrice}"
+                                            Text="{Binding Path=RetailPrice,Converter={StaticResource MoneyConverter}}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -250,7 +259,7 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock
-                                            Text="{Binding Path=WholesalerPrice}"
+                                            Text="{Binding Path=WholesalerPrice,Converter={StaticResource MoneyConverter}}"
                                             FontSize="{DynamicResource GridFontSize}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
@@ -259,7 +268,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </StackPanel>
+            </Border>
         </Grid>
     </materialDesign:DialogHost>
 </UserControl>

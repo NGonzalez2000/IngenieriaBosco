@@ -4,6 +4,8 @@ using IngenieriaBosco.Front.Windows;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 
 namespace IngenieriaBosco.Core.Resources
@@ -37,6 +39,20 @@ namespace IngenieriaBosco.Core.Resources
         }
         public static string TestConnection()
         {
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                return "Sin conexión";
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    if(ip.ToString() != DataBaseSettings.Default.IP)
+                    {
+                        DataBaseSettings.Default.IP = ip.ToString();
+                        DataBaseSettings.Default.Save();
+                    }
+                }
+            }
             try
             {
                 using SqlConnection connection = new(ConnectionString());

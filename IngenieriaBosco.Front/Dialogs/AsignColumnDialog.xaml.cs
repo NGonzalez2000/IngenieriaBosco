@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IngenieriaBosco.Front.Dialogs.Filters
+namespace IngenieriaBosco.Front.Dialogs
 {
     /// <summary>
-    /// Interaction logic for ProductSort.xaml
+    /// Interaction logic for AsignColumnDialog.xaml
     /// </summary>
-    public partial class ProductSort : UserControl
+    public partial class AsignColumnDialog : UserControl
     {
-        public ProductSort()
+        public AsignColumnDialog()
         {
             InitializeComponent();
         }

@@ -262,7 +262,7 @@ namespace IngenieriaBosco.Core.ViewModels
 
             SelectProviderDialogModel selectProviderDialogModel = new(_providers);
             
-            ProviderModel? providerModel = await selectProviderDialogModel.GetProvider();
+            ProviderModel? providerModel = await selectProviderDialogModel.GetProvider(DialogIdentifiers.Category_Identifier);
 
             if (providerModel is null) return;
 

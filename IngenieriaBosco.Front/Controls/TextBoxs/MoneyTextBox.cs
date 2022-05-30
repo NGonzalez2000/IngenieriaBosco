@@ -22,6 +22,8 @@ namespace IngenieriaBosco.Front.Controls.TextBoxs
                     bindingPath = value;
                     Binding binding = new(bindingPath);
                     binding.Converter = new ESARConverter();
+                    binding.ValidatesOnDataErrors = true;
+                    binding.ValidatesOnExceptions = true;
                     binding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
                     SetBinding(TextProperty, binding);
                 };

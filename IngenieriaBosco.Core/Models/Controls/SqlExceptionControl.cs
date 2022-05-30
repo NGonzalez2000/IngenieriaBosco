@@ -44,6 +44,8 @@ namespace IngenieriaBosco.Core.Models.Controls
             DataBaseSettings.Default.Save();
 
             ExceptionMessage = DBAccess.TestConnection();
+
+            if (string.IsNullOrEmpty(ExceptionMessage)) sqlWindow.Close();
         }
         public static ICommand CancelCommand => new RelayCommand(_ => CancelExecute());
         private static void CancelExecute()

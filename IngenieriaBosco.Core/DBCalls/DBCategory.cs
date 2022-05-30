@@ -17,7 +17,11 @@ namespace IngenieriaBosco.Core.DBCalls
             => SaveData(storedProcedure: CategorySP.spCategory_Delete, new {category.Id});
         internal static Task<IEnumerable<CategoryModel>> SelectAll()
             => LoadData<CategoryModel, dynamic>(storedProcedure: CategorySP.spCategory_SelectAll, new { });
+        internal static Task<IEnumerable<CategoryModel>> SelectByName(string name)
+            => LoadData<CategoryModel, dynamic>(storedProcedure: CategorySP.spCategory_SelectByName, new { Name = name});
         internal static Task<IEnumerable<int>> IsDuplicate(string CategoryName)
             => LoadData<int, dynamic>(storedProcedure: CategorySP.spCategory_IsDuplicate, new {CategoryName = CategoryName});
+        internal static Task<IEnumerable<CategoryModel>> SelectByProvider(ProviderModel provider)
+            => LoadData<CategoryModel, dynamic>(storedProcedure: CategorySP.spCategory_SelectByProvider, new { provider.Id });
     }
 }

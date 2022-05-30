@@ -7,5 +7,8 @@
         internal const string spProduct_Delete = "[dbo].[spProduct_Delete]";
         internal const string spProduct_SelectByCategory = "[dbo].[spProduct_SelectByCategory]";
         internal const string spProduct_SelectBrand = "[dbo].[spProduct_SelectBrand]";
+        internal const string spProduct_CheckCode = "[dbo].[spProduct_CheckCode]";
+        internal const string spProduct_GetCategory = "[dbo].[spProduct_GetCategory]";
+        internal const string spProduct_SelectByBrand = "[dbo].[spProduct_SelectByBrand]";
     }
 }

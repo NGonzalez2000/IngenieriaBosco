@@ -5,7 +5,7 @@ BEGIN
 
 SET NOCOUNT ON
 
-SELECT [Id], [Code], [Description], [ListingPrice], [RetailPrice], [WholesalerPrice], [Stock], [WariningStock]
+SELECT [Id], [Code], [Description], [ListingPrice], [RetailPrice], [WholesalerPrice], [Stock], [WarningStock]
 	FROM [dbo].[Products]
 		WHERE [CategoryId] = @CategoryId
 

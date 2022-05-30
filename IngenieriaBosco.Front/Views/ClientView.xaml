@@ -83,10 +83,12 @@
                         <TextBlock
                             Text="Nombre:   "
                             FontFamily="Bold"
-                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
                         <TextBlock
                             Text="{Binding Path=ClientList.SelectedItem.FirstName}"
-                            FontSize="{DynamicResource GeneralFontSize}"/>
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel
@@ -95,10 +97,12 @@
                         <TextBlock
                             Text="Apellido:   "
                             FontFamily="Bold"
-                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
                         <TextBlock
                             Text="{Binding Path=ClientList.SelectedItem.LastName}"
-                            FontSize="{DynamicResource GeneralFontSize}"/>
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel
@@ -107,16 +111,18 @@
                         <TextBlock
                             Text="CUIL:   "
                             FontFamily="Bold"
-                            FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
                         <TextBlock
                             Text="{Binding Path=ClientList.SelectedItem.CUIL, Converter={StaticResource CuilConverter}}"
-                            FontSize="{DynamicResource GeneralFontSize}"/>
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
                     </StackPanel>
                 </StackPanel>
 
 
                 <!--  Column 3 OrderBy & Filter  -->
-                <!--<StackPanel
+                <StackPanel
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Orientation="Horizontal">
@@ -134,7 +140,7 @@
                             Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <filters:ProductSort DataContext="{Binding ProductSort}"/>
+                            <filters:SortUserControl DataContext="{Binding ClientSort}"/>
                             <Button
                             Content="ORDENAR"
                             HorizontalContentAlignment="Center"
@@ -156,7 +162,7 @@
                             Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <filters:ProductFilter DataContext="{Binding ProductFilter}"/>
+                            <filters:ClientFilter DataContext="{Binding ClientFilter}"/>
                             <Button
                             Content="FILTRAR"
                             HorizontalContentAlignment="Center"
@@ -165,17 +171,16 @@
                         </StackPanel>
 
                     </materialDesign:PopupBox>
-                </StackPanel>-->
+                </StackPanel>
 
 
             </UniformGrid>
 
-            <StackPanel
+            <Border
                 Grid.Row="1"
-                Margin="0 30">
-                <Separator
-                    Height="2"
-                    Background="{DynamicResource PrimaryHueDarkBrush}"/>
+                Margin="0 30"
+                BorderThickness="0 2 0 0"
+                BorderBrush="{DynamicResource PrimaryHueDarkBrush}">
                 <ListView
                     ItemsSource="{Binding Path=ClientList.Collection}"
                     SelectedItem="{Binding Path=ClientList.SelectedItem}">
@@ -251,7 +256,7 @@
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </StackPanel>
+            </Border>
         </Grid>
     </materialDesign:DialogHost>
 </UserControl>

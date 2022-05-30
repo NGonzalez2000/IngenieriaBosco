@@ -68,6 +68,9 @@
     <Folder Include="dbo\StoredProcedure\spBrandProviders" />
     <Folder Include="dbo\StoredProcedure\spClient" />
     <Folder Include="ResetDB" />
+    <Folder Include="dbo\StoredProcedure\spCashOperations" />
+    <Folder Include="dbo\StoredProcedure\spCurrency" />
+    <Folder Include="dbo\StoredProcedure\spProductOrder" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Brands.sql" />
@@ -114,6 +117,26 @@
     <Build Include="dbo\StoredProcedure\spClient\spClient_DeleteEmail.sql" />
     <Build Include="dbo\StoredProcedure\spClient\spClient_SelectEmails.sql" />
     <Build Include="dbo\StoredProcedure\spProduct\spProduct_SelectBrand.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_CheckCode.sql" />
+    <Build Include="dbo\StoredProcedure\spCategory\spCategory_SelectByName.sql" />
+    <Build Include="dbo\StoredProcedure\spBrand\spBrand_CheckBrand.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_GetCategory.sql" />
+    <Build Include="dbo\Tables\CashOperations.sql" />
+    <Build Include="dbo\StoredProcedure\spCashOperations\spCashOperation_Insert.sql" />
+    <Build Include="dbo\Tables\Currency.sql" />
+    <Build Include="dbo\StoredProcedure\spCashOperations\spCashOperation_SelectTop.sql" />
+    <Build Include="dbo\StoredProcedure\spCurrency\spCurrency_Select.sql" />
+    <Build Include="dbo\Tables\ProductOrders.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_SelectAll.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_GetProvider.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_GetProducts.sql" />
+    <Build Include="dbo\Tables\ProductOrderList.sql" />
+    <Build Include="dbo\StoredProcedure\spCategory\spCategory_SelectByProvider.sql" />
+    <Build Include="dbo\StoredProcedure\spBrand\spBrand_SelectByCategory_Provider.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_SelectByBrand.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_InsertProduct.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishDirectory\IngenieriaBosco.SQLServer.publish.xml" />

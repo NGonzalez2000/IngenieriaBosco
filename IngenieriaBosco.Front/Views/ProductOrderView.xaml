@@ -1,0 +1,230 @@
+﻿<UserControl x:Class="IngenieriaBosco.Front.Views.ProductOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IngenieriaBosco.Front.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:filters="clr-namespace:IngenieriaBosco.Front.Dialogs.Filters"
+             xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <converters:ESARConverter x:Key="MoneyConverter"/>
+    </UserControl.Resources>
+    <materialDesign:DialogHost
+        Identifier="ProductOrderViewDialog"
+        DialogTheme="Inherit">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <UniformGrid
+                Columns="3">
+
+                <!--    Column 1  Buttons  -->
+                <StackPanel HorizontalAlignment="Left">
+                    <Button
+                        Margin="20 30 20 20"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=NewOrder_Command}"
+                        Content="NUEVO PEDIDO"/>
+                    
+
+                </StackPanel>
+
+
+                <!-- Column 2 Selected Order -->
+                <StackPanel>
+                    <UniformGrid Columns="2">
+                        <TextBlock
+                            Text="PEDIDO SELECCIONADO"
+                            Margin="0 20 0 0"
+                            FontSize="{DynamicResource HeaderFontSize}"
+                            Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+
+                            <Button
+                                ToolTip="ELIMINAR"
+                                Command="{Binding Path=DeleteOrder_Command}"
+                                Style="{StaticResource MaterialDesignIconButton}">
+
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Delete"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <Separator
+                        Background="{DynamicResource PrimaryHueMidBrush}"
+                        Height="2"/>
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="Orden nº :   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
+                        <TextBlock
+                            Text="{Binding Path=Orders.SelectedItem.Id}"
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="Proveedor:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
+                        <TextBlock
+                            Text="{Binding Path=Orders.SelectedItem.Provider.Name}"
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>
+
+
+                <!--  Column 3 OrderBy & Filter  -->
+                <!--<StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+
+                    <materialDesign:PopupBox
+                        x:Name="SortPopupBox"
+                        PlacementMode="LeftAndAlignMiddles"
+                        StaysOpen="True"
+                        Margin="30 0">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="Sort"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:ProductSort DataContext="{Binding ProductSort}"/>
+                            <Button
+                            Content="ORDENAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=SortCommand}"
+                            Click="Sort_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+
+                    <materialDesign:PopupBox
+                    x:Name="FilterPopupBox"
+                    PlacementMode="LeftAndAlignMiddles"
+                    StaysOpen="True">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="FilterOutline"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:ProductFilter DataContext="{Binding ProductFilter}"/>
+                            <Button
+                            Content="FILTRAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=FilterCommand}"
+                            Click="Filter_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+                </StackPanel>-->
+
+
+            </UniformGrid>
+
+            <StackPanel
+                Grid.Row="1"
+                Margin="0 30">
+                <Separator
+                    Height="2"
+                    Background="{DynamicResource PrimaryHueDarkBrush}"/>
+                <ListView
+                    ItemsSource="{Binding Path=Orders.Collection}"
+                    SelectedItem="{Binding Path=Orders.SelectedItem}">
+                    <ListView.View>
+                        <GridView>
+
+                            <GridViewColumn
+                                Header="Nº">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=Id}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="Proveedor">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=Provider.Name}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="Fecha">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=Date}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="Importe Pesos">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=ARGPrice,Converter={StaticResource MoneyConverter}}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn
+                                Header="Importe Dolares">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=USDPrice,Converter={StaticResource MoneyConverter}}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            
+
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </Grid>
+    </materialDesign:DialogHost>
+</UserControl>

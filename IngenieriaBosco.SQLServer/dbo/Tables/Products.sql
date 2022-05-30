@@ -12,5 +12,5 @@
 	[WholesalerPrice] MONEY NOT NULL,
 
 	[Stock] INT NOT NULL,
-	[WariningStock] INT NOT NULL
+	[WarningStock] INT NOT NULL
 )

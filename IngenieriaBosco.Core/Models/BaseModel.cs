@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IngenieriaBosco.Core.Models
 {
-    public abstract class BaseModel
+    public abstract class BaseModel : INotify
     {
         public object ShallowCopy()
         {

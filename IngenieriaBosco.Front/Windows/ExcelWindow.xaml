@@ -1,0 +1,123 @@
+﻿<Window x:Class="IngenieriaBosco.Front.Windows.ExcelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IngenieriaBosco.Front.Windows"
+        xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Style="{StaticResource MaterialDesignWindow}"
+        Title="Importar Productos" Height="450" Width="800"
+        WindowState="Maximized">
+    <Window.Resources>
+        <converters:StringToInt32Converter x:Key="StringToIntConverter"/>
+    </Window.Resources>
+    <materialDesign:DialogHost
+        DialogTheme="Inherit"
+        Identifier="ExcelViewDialog">
+        
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Border
+            Margin="0 30"
+            BorderThickness="0 0 0 3"
+            BorderBrush="{DynamicResource PrimaryHueMidBrush}">
+            <UniformGrid Columns="5"
+                         Margin="0 0 0 30">
+                <!-- Pick Excel File -->
+                <Button
+                    Content="SELECCIONAR EXCEL"
+                    FontSize="{DynamicResource ButtonFontSize}"
+                    Command="{Binding Path=SelectExcelFile_Command}"
+                    VerticalAlignment="Center"
+                    Margin="20 0"/>
+
+                <!-- Set Sheet -->
+                <StackPanel VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+                    <ComboBox
+                        Margin="0 10"
+                        ItemsSource="{Binding Path=SheetNames}"
+                        FontSize="{DynamicResource GeneralFontSize}"
+                        SelectedIndex="{Binding Path=SheetIndx}"/>
+                    <Button
+                        Margin="10"
+                        Content="ABRIR"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=ReadExcelFile_Command}"
+                        CommandParameter="{Binding ElementName=Sheet_Display}"/>
+                </StackPanel>
+
+                <!-- Set Columns -->
+                <Button VerticalAlignment="Center"
+                        Margin="20 0"
+                        Content="ASIGNAR COLUMNAS"
+                        Command="{Binding Path=AsignColumns_Command}"
+                        CommandParameter="{Binding ElementName=Sheet_Display}"
+                        FontSize="{DynamicResource ButtonFontSize}"/>
+
+                <!-- Set Rows Range -->
+                <UniformGrid Rows="2">
+                    <TextBox
+                        Text="{Binding Path=Sheet.FirstRow,
+                                       Converter={StaticResource StringToIntConverter},
+                                       UpdateSourceTrigger=PropertyChanged,
+                                       ValidatesOnDataErrors=True,
+                                       ValidatesOnExceptions=True}"
+                        FontSize="{DynamicResource GeneralFontSize}"
+                        VerticalAlignment="Center"/>
+                    <TextBox
+                        Text="{Binding Path=Sheet.LastRow,
+                                       Converter={StaticResource StringToIntConverter},
+                                       UpdateSourceTrigger=PropertyChanged,
+                                       ValidatesOnDataErrors=True,
+                                       ValidatesOnExceptions=True}"
+                        FontSize="{DynamicResource GeneralFontSize}"
+                        VerticalAlignment="Center"/>
+                </UniformGrid>
+
+                <UniformGrid Rows="2">
+                    <Button
+                        Content="VER"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=Sheet.SelectRowsCommand}"
+                        CommandParameter="{Binding ElementName=Sheet_Source}"
+                        VerticalAlignment="Center"
+                        Margin="20 0"/>
+                
+                    <Button
+                        Content="IMPORTAR"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=ImportProducts_Command}"
+                        VerticalAlignment="Center"
+                        Margin="20 0"/>
+                </UniformGrid>
+            </UniformGrid>
+        </Border>
+        
+        <!-- Excel Sheet -->
+        <ListView Grid.Row="1"
+                  ItemsSource="{Binding Path=Sheet.Rows}"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  SelectionMode="Multiple"
+                  x:Name="Sheet_Source">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignGridViewItem}">
+                    <Setter Property="IsSelected" Value="{Binding IsSelected}"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView x:Name="Sheet_Display"/>
+            </ListView.View>
+        </ListView>
+    </Grid>
+
+    </materialDesign:DialogHost>
+
+</Window>

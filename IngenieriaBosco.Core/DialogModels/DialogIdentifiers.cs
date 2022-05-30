@@ -13,5 +13,12 @@ namespace IngenieriaBosco.Core.DialogModels
         internal const string Provider_Identifier = "ProviderViewDialog";
         internal const string Product_Identifier = "ProductViewDialog";
         internal const string Client_Identifier = "ClientViewDialog";
+        internal const string Excel_Identifier = "ExcelViewDialog";
+        internal const string ImportProduct_Identifier = "ImportProductDialog";
+        internal const string CashRegister_Identifier = "CashRegisterView";
+        internal const string ProductOrder_Identifier = "ProductOrderViewDialog";
+        internal const string ProductOrderWindow_Identifier = "ProductOrderWindowDialog";
+        internal const string SearchProduct_Identifier = "SearchProductDialog";
+
     }
 }

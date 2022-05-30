@@ -20,12 +20,10 @@ namespace IngenieriaBosco.Front.Dialogs
     /// </summary>
     public partial class ProductDialog : UserControl
     {
-        public ProductDialog(string header, SelectionChangedEventHandler selectionChanged)
+        public ProductDialog(string header)
         {
             InitializeComponent();
             HeaderTextBlock.Text = header;
-            CategoryComboBox.SelectionChanged += selectionChanged;
-            
         }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)

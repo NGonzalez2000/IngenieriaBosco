@@ -18,13 +18,13 @@ namespace IngenieriaBosco.Core.DialogModels
             Providers = new(providers);
         }
 
-        public async Task<ProviderModel?> GetProvider()
+        public async Task<ProviderModel?> GetProvider(string dialogIdentifier)
         {
             SelectProviderDialog selectDialog = new()
             {
                 DataContext = this
             };
-            bool response = await DialogHosting(selectDialog, DialogIdentifiers.Category_Identifier, closingEventHandler: ClosingEventHandler_New);
+            bool response = await DialogHosting(selectDialog, dialogIdentifier, closingEventHandler: ClosingEventHandler_New);
             if (response) return SelectedProvider;
             return null;
         }

@@ -13,5 +13,7 @@ namespace IngenieriaBosco.Core.Resources.DBStoredProcedures
         internal const string spCategory_Delete = "[dbo].[spCategory_Delete]";
         internal const string spCategory_SelectAll = "[dbo].[spCategory_SelectAll]";
         internal const string spCategory_IsDuplicate = "[dbo].[spCategory_IsDuplicate]";
+        internal const string spCategory_SelectByName = "[dbo].[spCategory_SelectByName]";
+        internal const string spCategory_SelectByProvider = "[dbo].[spCategory_SelectByProvider]";
     }
 }

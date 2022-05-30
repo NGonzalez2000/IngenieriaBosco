@@ -49,6 +49,9 @@ namespace IngenieriaBosco.Core.ViewModels
             yield return new ItemModel("Categorías y marcas", typeof(CategoryView), new CategoryViewModel(snackbarMessageQueue));
             yield return new ItemModel("Proveedores", typeof(ProviderView), new ProviderViewModel(snackbarMessageQueue));
             yield return new ItemModel("Clientes", typeof(ClientView), new ClientViewModel(snackbarMessageQueue));
+            yield return new ItemModel("Ventas", typeof(SellView), new SellViewModel(snackbarMessageQueue));
+            yield return new ItemModel("Caja", typeof(CashRegisterView), new CashRegisterViewModel(snackbarMessageQueue));
+            yield return new ItemModel("Pedidos", typeof(ProductOrderView), new ProductOrderViewModel(snackbarMessageQueue));
         }
     }
 }

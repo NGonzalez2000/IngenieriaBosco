@@ -1,4 +1,5 @@
 ﻿using IngenieriaBosco.Core.DialogModels;
+using IngenieriaBosco.Core.Models.Filters;
 using IngenieriaBosco.Core.Models.Generics;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -12,12 +13,18 @@ namespace IngenieriaBosco.Core.ViewModels
         public ICommand NewClientCommand => new RelayCommand(_ => NewClientExecute());
         public ICommand EditClientCommand => new RelayCommand(_ => EditClientExecute());
         public ICommand DeleteClientCommand => new RelayCommand(_ => DeleteClientExecute());
+        public ClientFilterModel? ClientFilter { get; set; }
+        public ClientSortModel? ClientSort { get; set; }
+        public ICommand FilterCommand => new RelayCommand(_ => FilterExecute());
+        public ICommand SortCommand => new RelayCommand(_ => SortExecute());
         public ClientViewModel(ISnackbarMessageQueue snackbarMessageQueue) : base(snackbarMessageQueue)
         {
         }
 
         public override async void Load()
         {
+            ClientFilter = new();
+            ClientSort = new();
             ClientList = new( await DBClient.SelectAll());
             foreach (ClientModel client in ClientList.Collection)
                 client.Emails = new(await DBClient.SelectEmails(client));
@@ -171,5 +178,15 @@ namespace IngenieriaBosco.Core.ViewModels
                 else i++;
             }
         }
+        private void FilterExecute()
+        {
+            if (ClientList is null) return;
+
+            ClientList.FilterExecute(ClientFilter!.Filter);
+
+            OnPropertyChanged(nameof(ClientList));
+        }
+        private void SortExecute()
+            => ClientList!.SortExecute(ClientSort!.OrderBy());
     }
 }

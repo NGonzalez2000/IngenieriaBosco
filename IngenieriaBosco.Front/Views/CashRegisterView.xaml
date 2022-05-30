@@ -1,0 +1,115 @@
+﻿<UserControl x:Class="IngenieriaBosco.Front.Views.CashRegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:IngenieriaBosco.Front.Views"
+             xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converters:ESARConverter x:Key="MoneyConverter"/>
+    </UserControl.Resources>
+    <materialDesign:DialogHost
+        DialogTheme="Inherit"
+        Identifier="CashRegisterView">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <UniformGrid Columns="2">
+                <StackPanel HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                        VerticalAlignment="Center"
+                        Text="ARG: "
+                        FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                        <TextBlock
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=CashRegister.ARG,Converter={StaticResource MoneyConverter}}"
+                        FontSize="{DynamicResource GeneralFontSize}"/>
+                    </StackPanel>
+                    <Button
+                        Content="MODIFICAR"
+                        Command="{Binding Path=Modify_Command}"
+                        CommandParameter="ARG"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Margin="0 20"/>
+                </StackPanel>
+
+                <StackPanel HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock
+                        VerticalAlignment="Center"
+                        Text="USD: "
+                        FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
+                        <TextBlock
+                        VerticalAlignment="Center"
+                        Text="{Binding Path=CashRegister.USD,Converter={StaticResource MoneyConverter}}"
+                        FontSize="{DynamicResource GeneralFontSize}"/>
+                    </StackPanel>
+                    <Button
+                        Content="MODIFICAR"
+                        Command="{Binding Path=Modify_Command}"
+                        CommandParameter="USD"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Margin="0 20"/>
+                </StackPanel>
+            </UniformGrid>
+
+            <StackPanel Grid.Row="1">
+                <TextBlock
+                    Text="HISTORIAL DE OPERACIONES"
+                    FontSize="{DynamicResource HeaderFontSize}"
+                    Margin="30 30 30 20"/>
+                <Separator Background="{DynamicResource SecondaryHueMidBrush}"/>
+            </StackPanel>
+            <ListView Grid.Row="2"
+                  ItemsSource="{Binding Path=CashOperations}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Operación">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                    Text="{Binding Path=Operation}"
+                                    FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Moneda">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                    Text="{Binding Path=Currency}"
+                                    FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Monto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                    Text="{Binding Path=Amount,Converter={StaticResource MoneyConverter}}"
+                                    FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Fecha">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                    Text="{Binding Path=Date}"
+                                    FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </Grid>
+    </materialDesign:DialogHost>
+</UserControl>

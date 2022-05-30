@@ -12,5 +12,7 @@ namespace IngenieriaBosco.Core.Resources.DBStoredProcedures
         internal const string spBrand_Update = "[dbo].[spBrand_Update]";
         internal const string spBrand_Delete = "[dbo].[spBrand_Delete]";
         internal const string spBrand_SelectByCategoryId = "[dbo].[spBrand_SelectByCategoryId]";
+        internal const string spBrand_CheckBrand = "[dbo].[spBrand_CheckBrand]";
+        internal const string spBrand_SelectByCategory_Provider = "[dbo].[spBrand_SelectByCategory_Provider]";
     }
 }

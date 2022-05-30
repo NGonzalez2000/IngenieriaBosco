@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="IngenieriaBosco.Front.Dialogs.Filters.ProductSort"
+﻿<UserControl x:Class="IngenieriaBosco.Front.Dialogs.Filters.SortUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,7 +11,7 @@
         <ComboBox
             MinWidth="150"
             MaxWidth="150"
-            materialDesign:HintAssist.Hint="Categoría"
+            materialDesign:HintAssist.Hint="Ordenar por"
             VerticalContentAlignment="Bottom"
             Margin="15"
             ItemsSource="{Binding Path=SortByOptions}"

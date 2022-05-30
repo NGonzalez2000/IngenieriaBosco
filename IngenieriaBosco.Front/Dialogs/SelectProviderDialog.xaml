@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock
-            Text="AGREGAR PROVEEDOR"
+            Text="ELEGIR PROVEEDOR"
             Margin="30"
             FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
 

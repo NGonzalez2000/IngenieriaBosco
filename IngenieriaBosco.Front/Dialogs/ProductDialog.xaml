@@ -57,12 +57,13 @@
                 materialDesign:HintAssist.Hint="Categoría"
                 Margin="30"
                 ItemsSource="{Binding Path=Categories}"
-                SelectedItem="{Binding Path=Product.Category,ValidatesOnDataErrors=True,ValidatesOnExceptions=True}"
+                SelectedIndex="{Binding Path=SelectedCategory,ValidatesOnDataErrors=True,ValidatesOnExceptions=True,UpdateSourceTrigger=PropertyChanged}"
                 DisplayMemberPath="Name">
             </ComboBox>
             
             <!-- Brand -->
             <ComboBox 
+                x:Name="BrandComboBox"
                 Grid.Row="1"
                 FontSize="{DynamicResource GeneralFontSize}"
                 Style="{DynamicResource MaterialDesignFloatingHintComboBox}"
@@ -70,7 +71,7 @@
                 materialDesign:HintAssist.Hint="Marca"
                 Margin="30"
                 ItemsSource="{Binding Path=Brands}"
-                SelectedItem="{Binding Path=Product.Brand}"
+                SelectedIndex="{Binding Path=SelectedBrand,UpdateSourceTrigger=PropertyChanged}"
                 DisplayMemberPath="Name">
             </ComboBox>
 

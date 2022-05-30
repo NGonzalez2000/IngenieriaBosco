@@ -19,6 +19,7 @@ namespace IngenieriaBosco.Core.Models
         public decimal WholesalerPrice { get; set; }
         public int Stock { get; set; } = 0;
         public int WarningStock { get; set; } = 0;
+        public int Multiplier { get; set; } = 0;
         public CategoryModel? Category { get; set; }
         public BrandModel? Brand { get; set; }
 
