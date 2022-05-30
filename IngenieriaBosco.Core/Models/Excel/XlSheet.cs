@@ -57,7 +57,7 @@ namespace IngenieriaBosco.Core.Models.Excel
             ListView listView = (ListView)param;
             listView.ScrollIntoView(Rows[firstRow - 1]);
         }
-        private bool SelectRows_Enamble()
+        public bool SelectRows_Enamble()
             => Rows != null &&
                 this[nameof(LastRow)] == string.Empty && 
                 this[nameof(FirstRow)] == string.Empty;
@@ -72,7 +72,7 @@ namespace IngenieriaBosco.Core.Models.Excel
             {
                 if(columnName == nameof(FirstRow))
                 {
-                    if (FirstRow < 0) return "El valor debe ser mayor a 0";
+                    if (FirstRow <= 0) return "El valor debe ser mayor a 0";
                     if (FirstRow > LastRow) return "El valor de comienzo debe ser menor al de finalizar";
                     if (FirstRow > RowCount) return "El valor esta fuera de rango";
                 }

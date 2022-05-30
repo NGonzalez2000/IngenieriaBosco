@@ -44,7 +44,7 @@ namespace IngenieriaBosco.Core.ViewModels
                 ProductOrder = new();
                 try
                 {
-                    ProductOrder.Id = await DBAccess.GetId("ProductOrders");
+                    ProductOrder.Id = (await DBAccess.GetId("ProductOrders")) + 1;
                     OnPropertyChanged(nameof(ProductOrder));
                 }
                 catch (Exception ex)
@@ -56,12 +56,12 @@ namespace IngenieriaBosco.Core.ViewModels
 
         public ICommand AddProduct_Command => new RelayCommand(_ => AddProduct_Execute());
         public ICommand RemoveProduct_Command => new RelayCommand(RemoveProduct_Execute);
-        public ICommand GenerateOrder_Command => new RelayCommand(GenerateOrder_Execute);
+        public ICommand GenerateOrder_Command => new RelayCommand(GenerateOrder_Execute, _ => ProductOrder != null && ProductOrder.Products != null && ProductOrder.Products.Count > 0);
         private async void AddProduct_Execute()
         {
             SearchProductDialogModel dialogModel = new();
             dialogModel.SetProvider(ProductOrder!.Provider!);
-            ProductModel? product = await dialogModel.GetProduct();
+            ProductModel? product = await dialogModel.GetProduct(DialogIdentifiers.ProductOrderWindow_Identifier);
             if (product != null)
             {
                 ProductOrder.InsertProduct(product);

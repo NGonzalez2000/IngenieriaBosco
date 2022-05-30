@@ -15,6 +15,11 @@ namespace IngenieriaBosco.Core.DBCalls
             => SaveData(storedProcedure: ProductOrderSP.spProductOrder_Insert, new { ProviderId = pom.Provider!.Id, pom.Date, pom.ARGPrice, pom.USDPrice, pom.IsRecived, pom.IsPayed });
         public static Task InsertProduct(ProductModel product, int OrderId)
             => SaveData(storedProcedure: ProductOrderSP.spProductOrder_InsertProduct, new { OrderId, product.Code, product.Description, product.ListingPrice, product.Multiplier });
+        public static Task Recived(int Id)
+            => SaveData(storedProcedure: ProductOrderSP.spProductOrder_Recived, new { Id });
+        public static Task Payed(int Id)
+            => SaveData(storedProcedure: ProductOrderSP.spProductOrder_Payed, new { Id });
+
         public static Task<IEnumerable<ProductOrderModel>> SelectAll()
             => LoadData<ProductOrderModel, dynamic>(storedProcedure: ProductOrderSP.spProductOrder_SelectAll, new { });
         public static Task<IEnumerable<ProviderModel>> GetProvider(int Id)

@@ -13,6 +13,7 @@ namespace IngenieriaBosco.Core.Models
         public ObservableCollection<ProductModel>? Products { get; set; }
         public ProviderModel? Provider { get; set; }
         public string Date { get; set; }
+        public DateOnly SortDate => DateOnly.Parse(Date);
         public decimal USDPrice { get; set; }
         public decimal ARGPrice { get; set; }
         public bool IsPayed { get; set; }

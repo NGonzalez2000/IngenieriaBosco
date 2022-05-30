@@ -106,26 +106,24 @@
             </textboxes:MoneyTextBox>
             
             <!-- Stock -->
-            <TextBox 
+            <textboxes:IntTextBox
                 Grid.Row="1"
                 materialDesign:HintAssist.Hint ="Stock"
                 FontSize="{DynamicResource GeneralFontSize}"
-                Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                 Margin="30"
-                Text="{Binding Path=Product.Stock,Converter={StaticResource StrToInt},UpdateSourceTrigger=PropertyChanged}"
+                BindingPath="Product.Stock"
                 PreviewTextInput="TextBox_PreviewTextInput">
-            </TextBox>
+            </textboxes:IntTextBox>
             
             <!-- Warning Stock -->
-            <TextBox 
+            <textboxes:IntTextBox
                 Grid.Row="1"
                 materialDesign:HintAssist.Hint ="Stock Mínimo"
                 FontSize="{DynamicResource GeneralFontSize}"
-                Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                 Margin="30"
-                Text="{Binding Path=Product.WarningStock,Converter={StaticResource StrToInt},UpdateSourceTrigger=PropertyChanged}"
+                BindingPath="Product.WarningStock"
                 PreviewTextInput="TextBox_PreviewTextInput">
-            </TextBox>
+            </textboxes:IntTextBox>
         </UniformGrid>
 
         

@@ -4,9 +4,164 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IngenieriaBosco.Front.Views"
+             xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:filters="clr-namespace:IngenieriaBosco.Front.Dialogs.Filters"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <UserControl.Resources>
+        <converters:CuilConverter x:Key="CUILConverter"/>
+    </UserControl.Resources>
+    <materialDesign:DialogHost
+        Identifier="ProviderViewDialog"
+        DialogTheme="Inherit">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <UniformGrid
+                Columns="3">
+
+                <!--    Column 1  Buttons  -->
+                <StackPanel HorizontalAlignment="Left">
+                    <Button
+                        Margin="20 30 20 20"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Content="NUEVA VENTA"
+                        Command="{Binding Path=NewSell_Command}"/>
+
+                </StackPanel>
+
+
+                <!-- Column 2 Selected Sell -->
+                <!--<StackPanel>
+                    <UniformGrid Columns="2">
+                        <TextBlock
+                            Text="PROVEEDOR SELECCIONADO"
+                            Margin="0 20 0 0"
+                            FontSize="{DynamicResource HeaderFontSize}"
+                            Foreground="{DynamicResource SecondaryHueMidBrush}"/>
+                        <StackPanel
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                            <Button
+                                ToolTip="EDITAR"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                Command="{Binding Path=EditProviderCommand}">
+
+                                <Button.Content>
+                                    <materialDesign:PackIcon 
+                                        Kind="Pencil"
+                                        Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                            <Button
+                                ToolTip="ELIMINAR"
+                                Style="{StaticResource MaterialDesignIconButton}"
+                                Command="{Binding Path=DeleteProviderCommand}">
+
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Delete"
+                                    Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                                </Button.Content>
+                            </Button>
+
+                        </StackPanel>
+                    </UniformGrid>
+
+                    <Separator
+                        Background="{DynamicResource PrimaryHueMidBrush}"
+                        Height="2"/>
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="Nombre:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
+                        <TextBlock
+                            Text="{Binding Path=ProviderList.SelectedItem.Name}"
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel
+                        Margin="0 20 0 0"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            Text="CUIT:   "
+                            FontFamily="Bold"
+                            FontSize="{DynamicResource SecondaryHeaderFontSize}"
+                            VerticalAlignment="Center"/>
+                        <TextBlock
+                            Text="{Binding Path=ProviderList.SelectedItem.CUIT, Converter={StaticResource CUILConverter}}"
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"/>
+                    </StackPanel>
+                </StackPanel>-->
+
+
+                <!--  Column 3 OrderBy & Filter  -->
+                <StackPanel
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Bottom"
+                    Orientation="Horizontal">
+
+                    <materialDesign:PopupBox
+                        x:Name="SortPopupBox"
+                        PlacementMode="LeftAndAlignMiddles"
+                        StaysOpen="True"
+                        Margin="30 0">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="Sort"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:SortUserControl DataContext="{Binding SellSort}"/>
+                            <Button
+                            Content="ORDENAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=SortCommand}"
+                            Click="Sort_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+
+                    <materialDesign:PopupBox
+                    x:Name="FilterPopupBox"
+                    PlacementMode="LeftAndAlignMiddles"
+                    StaysOpen="True">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon
+                            Kind="FilterOutline"
+                            Height="30"                 
+                            Width="30"                 
+                            Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
+                        </materialDesign:PopupBox.ToggleContent>
+                        <StackPanel>
+                            <filters:SellFilter DataContext="{Binding SellFilter}"/>
+                            <Button
+                            Content="FILTRAR"
+                            HorizontalContentAlignment="Center"
+                            Command="{Binding Path=FilterCommand}"
+                            Click="Filter_Click"/>
+                        </StackPanel>
+
+                    </materialDesign:PopupBox>
+                </StackPanel>
+
+
+
+            </UniformGrid>
+            <!--List Of Sells-->
             
-    </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
 </UserControl>

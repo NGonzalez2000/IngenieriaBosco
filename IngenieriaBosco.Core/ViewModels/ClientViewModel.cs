@@ -29,6 +29,8 @@ namespace IngenieriaBosco.Core.ViewModels
             foreach (ClientModel client in ClientList.Collection)
                 client.Emails = new(await DBClient.SelectEmails(client));
 
+            OnPropertyChanged(nameof(ClientFilter));
+            OnPropertyChanged(nameof(ClientSort));
             OnPropertyChanged(nameof(ClientList));
         }
 

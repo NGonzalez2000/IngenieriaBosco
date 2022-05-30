@@ -5,7 +5,7 @@
              xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:IngenieriaBosco.Front.Dialogs" 
-             xmlns:system="clr-namespace:System;assembly=mscorlib" 
+             xmlns:system="clr-namespace:System;assembly=mscorlib" xmlns:textboxs="clr-namespace:IngenieriaBosco.Front.Controls.TextBoxs"
              mc:Ignorable="d" 
              MinWidth="500"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -21,14 +21,14 @@
             Margin="30"
             FontSize="{DynamicResource SecondaryHeaderFontSize}"/>
 
-        <TextBox 
+        <textboxs:IntTextBox 
             Grid.Row="1"
             FontSize="{DynamicResource GeneralFontSize}"
             Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
             Margin="30"
             CharacterCasing="Upper"
-            Text="{Binding Path=Amount}">
-        </TextBox>
+            BindingPath="Amount">
+        </textboxs:IntTextBox>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="2" Margin="20">
             <Button x:Name="TrueButton" Content="ACEPTAR" FontSize="{DynamicResource ButtonFontSize}" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" Margin="20 0">

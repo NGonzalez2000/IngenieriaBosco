@@ -12,6 +12,7 @@
 
     <UserControl.Resources>
         <converters:ESARConverter x:Key="MoneyConverter"/>
+        <converters:BooleanToSINOConverter x:Key="BooleanConverter"/>
     </UserControl.Resources>
     <materialDesign:DialogHost
         Identifier="ProductOrderViewDialog"
@@ -33,7 +34,19 @@
                         FontSize="{DynamicResource ButtonFontSize}"
                         Command="{Binding Path=NewOrder_Command}"
                         Content="NUEVO PEDIDO"/>
-                    
+
+                    <Button
+                        Margin="20 30 20 20"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=RecivedOrder_Command}"
+                        Content="PEDIDO RECIBIDO"/>
+
+                    <Button
+                        Margin="20 30 20 20"
+                        FontSize="{DynamicResource ButtonFontSize}"
+                        Command="{Binding Path=PayedOrder_Command}"
+                        Content="PEDIDO PAGADO"/>
+
 
                 </StackPanel>
 
@@ -98,7 +111,7 @@
 
 
                 <!--  Column 3 OrderBy & Filter  -->
-                <!--<StackPanel
+                <StackPanel
                     HorizontalAlignment="Center"
                     VerticalAlignment="Bottom"
                     Orientation="Horizontal">
@@ -116,7 +129,7 @@
                             Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <filters:ProductSort DataContext="{Binding ProductSort}"/>
+                            <filters:SortUserControl DataContext="{Binding ProductOrderSort}"/>
                             <Button
                             Content="ORDENAR"
                             HorizontalContentAlignment="Center"
@@ -138,7 +151,7 @@
                             Foreground="{DynamicResource SecondaryHueDarkBrush}"/>
                         </materialDesign:PopupBox.ToggleContent>
                         <StackPanel>
-                            <filters:ProductFilter DataContext="{Binding ProductFilter}"/>
+                            <filters:ProductOrderFilter DataContext="{Binding ProductOrderFilter}"/>
                             <Button
                             Content="FILTRAR"
                             HorizontalContentAlignment="Center"
@@ -147,7 +160,7 @@
                         </StackPanel>
 
                     </materialDesign:PopupBox>
-                </StackPanel>-->
+                </StackPanel>
 
 
             </UniformGrid>
@@ -219,7 +232,29 @@
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
 
+                            <GridViewColumn
+                                Header="Recibido">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=IsRecived,Converter={StaticResource BooleanConverter}}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn
+                                Header="Pagado">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Text="{Binding Path=IsPayed,Converter={StaticResource BooleanConverter}}"
+                                            FontSize="{DynamicResource GridFontSize}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
                             
+
+
 
                         </GridView>
                     </ListView.View>

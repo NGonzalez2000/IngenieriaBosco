@@ -12,6 +12,8 @@ namespace IngenieriaBosco.Core.Resources.DBStoredProcedures
         internal const string spProductOrder_GetProvider = "[dbo].[spProductOrder_GetProvider]";
         internal const string spProductOrder_GetProducts = "[dbo].[spProductOrder_GetProducts]";
         internal const string spProductOrder_Insert = "[dbo].[spProductOrder_Insert]";
+        internal const string spProductOrder_Recived = "[dbo].[spProductOrder_Recived]";
+        internal const string spProductOrder_Payed = "[dbo].[spProductOrder_Payed]";
         internal const string spProductOrder_Delete = "[dbo].[spProductOrder_Delete]";
         internal const string spProductOrder_InsertProduct = "[dbo].[spProductOrder_InsertProduct]";
     }

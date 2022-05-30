@@ -30,7 +30,7 @@ namespace IngenieriaBosco.Core.ViewModels
         public ICommand SelectExcelFile_Command => new RelayCommand(_ => SelectExcelFile_Execute());
         public ICommand ReadExcelFile_Command => new RelayCommand(ReadExcelFile_Execute,_ => ReadExcelFile_Enable());
         public ICommand AsignColumns_Command => new RelayCommand(AsignColumns_Execute);
-        public ICommand ImportProducts_Command => new RelayCommand(_ => ImportProducts_Execute());
+        public ICommand ImportProducts_Command => new RelayCommand(_ => ImportProducts_Execute(), _ => Sheet!=null && Sheet.SelectRows_Enamble() && EnableAsignations());
 
         public ExcelViewModel(ISnackbarMessageQueue snackbarMessageQueue) : base(snackbarMessageQueue)
         {
@@ -41,7 +41,14 @@ namespace IngenieriaBosco.Core.ViewModels
         public override void Load()
         {
         }
-
+        private bool EnableAsignations()
+        {
+            for(int i = 0; i < asignations.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(asignations[i])) return true;
+            }
+            return false;
+        }
         private void SelectExcelFile_Execute()
         {
             GetExcelPath();

@@ -44,6 +44,9 @@ namespace IngenieriaBosco.Core.DBCalls
         internal static Task Delete(ProductModel product)
             => SaveData(storedProcedure: ProductSP.spProduct_Delete, new { product.Id });
 
+        public static Task Recived(int Id)
+            => SaveData(storedProcedure: ProductSP.spProduct_Recived, new { Id });
+
         internal static Task<IEnumerable<ProductModel>> CheckCode(string code)
             => LoadData<ProductModel,dynamic>(storedProcedure:ProductSP.spProduct_CheckCode, new {Code = code});
         internal static Task<IEnumerable<ProductModel>> SelectByCategory(CategoryModel category)

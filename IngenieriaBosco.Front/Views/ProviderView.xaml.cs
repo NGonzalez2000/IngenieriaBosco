@@ -35,5 +35,14 @@ namespace IngenieriaBosco.Front.Views
                 Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
             }
         }
+        private void Filter_Click(object sender, RoutedEventArgs e)
+        {
+            FilterPopupBox.IsPopupOpen = false;
+        }
+
+        private void Sort_Click(object sender, RoutedEventArgs e)
+        {
+            SortPopupBox.IsPopupOpen = false;
+        }
     }
 }

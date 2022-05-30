@@ -10,28 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IngenieriaBosco.Front.Views
+namespace IngenieriaBosco.Front.Windows
 {
     /// <summary>
-    /// Interaction logic for SellView.xaml
+    /// Interaction logic for SellWindow.xaml
     /// </summary>
-    public partial class SellView : UserControl
+    public partial class SellWindow : Window
     {
-        public SellView()
+        public SellWindow()
         {
             InitializeComponent();
-        }
-        private void Filter_Click(object sender, RoutedEventArgs e)
-        {
-            FilterPopupBox.IsPopupOpen = false;
-        }
-
-        private void Sort_Click(object sender, RoutedEventArgs e)
-        {
-            SortPopupBox.IsPopupOpen = false;
         }
     }
 }

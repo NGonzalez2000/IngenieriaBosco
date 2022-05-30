@@ -1,4 +1,5 @@
 ﻿using IngenieriaBosco.Core.DialogModels;
+using IngenieriaBosco.Core.Models.Filters;
 using IngenieriaBosco.Core.Models.Generics;
 using MaterialDesignThemes.Wpf;
 using System;
@@ -15,15 +16,23 @@ namespace IngenieriaBosco.Core.ViewModels
         }
         public override async void Load()
         {
+            ProviderFilter = new();
+            ProviderSort = new();
             ProviderList = new(await DBProvider.SelectAll());
             foreach(ProviderModel provider in ProviderList.Collection)
                 provider.Emails = new(await DBProvider.SelectEmails(provider));
 
+            OnPropertyChanged(nameof(ProviderFilter));
+            OnPropertyChanged(nameof(ProviderSort));
             OnPropertyChanged(nameof(ProviderList));
         }
         public ICommand NewProviderCommand => new RelayCommand(_ => NewProviderAction());
         public ICommand EditProviderCommand => new RelayCommand(_ => EditProviderAction());
         public ICommand DeleteProviderCommand => new RelayCommand(_ => DeleteProviderAction());
+        public ICommand FilterCommand => new RelayCommand(_ => FilterExecute());
+        public ICommand SortCommand => new RelayCommand(_ => SortExecute());
+        public ProviderFilterModel? ProviderFilter { get; set; }
+        public ProviderSortModel? ProviderSort { get; set; }
         private async void NewProviderAction()
         {
             ProviderDialogModel dialogModel = new();
@@ -167,5 +176,15 @@ namespace IngenieriaBosco.Core.ViewModels
                 else i++;
             }
         }
+        private void FilterExecute()
+        {
+            if (ProviderList is null) return;
+
+            ProviderList.FilterExecute(ProviderFilter!.Filter);
+
+            OnPropertyChanged(nameof(ProviderList));
+        }
+        private void SortExecute()
+            => ProviderList!.SortExecute(ProviderSort!.OrderBy());
     }
 }

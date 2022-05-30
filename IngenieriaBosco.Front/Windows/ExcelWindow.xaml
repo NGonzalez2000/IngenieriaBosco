@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IngenieriaBosco.Front.Windows"
         xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:textboxs="clr-namespace:IngenieriaBosco.Front.Controls.TextBoxs"
         mc:Ignorable="d"
         Style="{StaticResource MaterialDesignWindow}"
         Title="Importar Productos" Height="450" Width="800"
@@ -64,20 +64,14 @@
 
                 <!-- Set Rows Range -->
                 <UniformGrid Rows="2">
-                    <TextBox
-                        Text="{Binding Path=Sheet.FirstRow,
-                                       Converter={StaticResource StringToIntConverter},
-                                       UpdateSourceTrigger=PropertyChanged,
-                                       ValidatesOnDataErrors=True,
-                                       ValidatesOnExceptions=True}"
+                    <textboxs:IntTextBox
+                        BindingPath="Sheet.FirstRow"
+                        materialDesign:HintAssist.Hint="Desde"
                         FontSize="{DynamicResource GeneralFontSize}"
                         VerticalAlignment="Center"/>
-                    <TextBox
-                        Text="{Binding Path=Sheet.LastRow,
-                                       Converter={StaticResource StringToIntConverter},
-                                       UpdateSourceTrigger=PropertyChanged,
-                                       ValidatesOnDataErrors=True,
-                                       ValidatesOnExceptions=True}"
+                    <textboxs:IntTextBox
+                        BindingPath="Sheet.LastRow"
+                        materialDesign:HintAssist.Hint="Hasta"
                         FontSize="{DynamicResource GeneralFontSize}"
                         VerticalAlignment="Center"/>
                 </UniformGrid>

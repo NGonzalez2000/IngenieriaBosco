@@ -19,6 +19,7 @@ namespace IngenieriaBosco.Core.DialogModels
         internal const string ProductOrder_Identifier = "ProductOrderViewDialog";
         internal const string ProductOrderWindow_Identifier = "ProductOrderWindowDialog";
         internal const string SearchProduct_Identifier = "SearchProductDialog";
+        internal const string SellWindow_Identifier = "SellWindowDialog";
 
     }
 }

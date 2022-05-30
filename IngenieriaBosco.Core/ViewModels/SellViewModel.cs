@@ -1,5 +1,5 @@
 ﻿using IngenieriaBosco.Core.Models.Generics;
-using IngenieriaBosco.Core.Models.Sells;
+using IngenieriaBosco.Front.Windows;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
@@ -17,14 +17,18 @@ namespace IngenieriaBosco.Core.ViewModels
         }
 
         public ICommand NewSell_Command => new RelayCommand(_ => NewSell_Execute());
-        public GridListModel<SellOrderModel>? Sells { get; set; }
         public override void Load()
         {
-            Sells = new();
         }
         private void NewSell_Execute()
         {
-
+            SellWindowModel dataContext = new(snackbarMessageQueue!);
+            dataContext.IsNewMode = true;
+            SellWindow sellWindow = new()
+            {
+                DataContext = dataContext
+            };
+            sellWindow.Show();
         }
     }
 }

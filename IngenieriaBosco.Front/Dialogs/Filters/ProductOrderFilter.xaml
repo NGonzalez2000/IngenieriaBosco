@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="IngenieriaBosco.Front.Dialogs.Filters.ProviderFilter"
+﻿<UserControl x:Class="IngenieriaBosco.Front.Dialogs.Filters.ProductOrderFilter"
               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,25 +10,25 @@
 
 
     <UniformGrid Columns="2">
+        <textboxs:IntTextBox
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint ="N°"
+            BindingPath="Number"
+            CharacterCasing="Upper"
+            MinWidth="150"
+            MaxWidth="150"
+            Margin="15"/>
+
         <TextBox
             VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint ="Nombre"
+            materialDesign:HintAssist.Hint ="Proveedor"
             Text="{Binding Path=ProviderName}"
             Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
             CharacterCasing="Upper"
             MinWidth="150"
             MaxWidth="150"
             Margin="15"/>
-
-        <textboxs:CuilTextBox
-            VerticalAlignment="Top"
-            materialDesign:HintAssist.Hint ="CUIT"
-            BindingPath="CUIT"
-            Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
-            CharacterCasing="Upper"
-            MinWidth="150"
-            MaxWidth="150"
-            Margin="15"/>
+        
 
 
     </UniformGrid>

@@ -3,9 +3,11 @@ using MaterialDesignThemes.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace IngenieriaBosco.Core.DialogModels
 {
@@ -13,7 +15,10 @@ namespace IngenieriaBosco.Core.DialogModels
     {
         private ProviderModel? provider;
         private CategoryModel? selectedCategory;
+        private string? code;
+        private string? description;
         private BrandModel? selectedBrand;
+        private ICollectionView? collectionView;
         public CategoryModel? SelectedCategory
         {
             get => selectedCategory;
@@ -32,10 +37,34 @@ namespace IngenieriaBosco.Core.DialogModels
             {
                 if(SetProperty(ref selectedBrand, value))
                 {
-                    LoadProducts();
+                    if(provider!= null)LoadProductsByBrand();
+                    else
+                    {
+                        UpdateFilter();
+                    }
                 }
             }
         }
+        public string? Code
+        {
+            get => code;
+            set
+            {
+                if(SetProperty(ref code,value) && collectionView != null)
+                    collectionView.Refresh();
+            }
+        }
+        public string? Description
+        {
+            get => description;
+            set
+            {
+                if (SetProperty(ref description, value) && collectionView != null)
+                    collectionView.Refresh();
+            }
+        }
+        
+
         public List<CategoryModel>? Categories { get; set; }
         public List<BrandModel>? Brands { get; set; }
         public ObservableCollection<ProductModel>? Products { get; set; }
@@ -45,18 +74,18 @@ namespace IngenieriaBosco.Core.DialogModels
         public void SetProvider(ProviderModel prov)
             =>  provider = prov;
 
-        public async Task<ProductModel?> GetProduct()
+        public async Task<ProductModel?> GetProduct(string dialogIdentifier)
         {
             await SetCategories();
             SearchProductDialog dialog = new()
             {
                 DataContext = this
             };
-            bool response = await DialogHosting(dialog, DialogIdentifiers.ProductOrderWindow_Identifier,closingEventHandler: ClosingEventHandler_New);
+            bool response = await DialogHosting(dialog, dialogIdentifier,closingEventHandler: ClosingEventHandler_New);
             if (!response || SelectedProduct == null) return null;
 
-            SelectedProduct.Category = SelectedCategory;
-            SelectedProduct.Brand = SelectedBrand;
+            if(SelectedCategory != null)SelectedProduct.Category = SelectedCategory;
+            if (SelectedBrand != null) SelectedProduct.Brand = SelectedBrand;
             SelectedProduct.Multiplier = Amount;
             return SelectedProduct;
         }
@@ -77,18 +106,51 @@ namespace IngenieriaBosco.Core.DialogModels
             if(provider is null)
             {
                 Brands = new(await DBBrand.SelectByCategoryId(SelectedCategory));
+                Products = new(await DBProduct.SelectByCategory(SelectedCategory));
+                foreach (ProductModel product in Products)
+                    product.Brand = (await DBProduct.SelectBrand(product)).FirstOrDefault(defaultValue:null);
                 OnPropertyChanged(nameof(Brands));
+                OnPropertyChanged(nameof(Products));
+                UpdateFilter();
 
                 return;
             }
             Brands = new(await DBBrand.SelectByCategory_Provider(SelectedCategory.Id, provider.Id));
             OnPropertyChanged(nameof(Brands));
         }
-        private async void LoadProducts()
+        private async void LoadProductsByBrand()
         {
             if(SelectedCategory is null || SelectedBrand is null) return;
             Products = new(await DBProduct.SelectByBrand(SelectedBrand));
             OnPropertyChanged(nameof(Products));
+            UpdateFilter();
+
+        }
+
+        private void UpdateFilter()
+        {
+            collectionView = CollectionViewSource.GetDefaultView(Products);
+            collectionView.Filter = Filter;
+            collectionView.Refresh();
+        }
+        private bool Filter(object o)
+        {
+            if (o is null) return false;
+            ProductModel product = (ProductModel)o;
+            return CheckBrand(product) &&
+                    Validate(Code, product.Code) &&
+                    Validate(Description, product.Description);
+        }
+        private bool CheckBrand(ProductModel p)
+        {
+            if (provider != null ) return SelectedBrand != null;
+            if (SelectedBrand == null) return true;
+            return p.Brand!.Id == SelectedBrand.Id;
+        }
+        private bool Validate(string? fst, string scd)
+        {
+            if(string.IsNullOrEmpty(fst)) return true;
+            return scd.Contains(fst);
         }
         public override void ClosingEventHandler_Edit(object sender, DialogClosingEventArgs eventArgs)
         {

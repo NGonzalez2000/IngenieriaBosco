@@ -12,7 +12,10 @@ namespace IngenieriaBosco.Core.Models.Filters
         public string? CUIT { get; set; }
         public override bool Filter(object o)
         {
-            throw new NotImplementedException();
+            if(o == null)return false;
+            ProviderModel provider = (ProviderModel)o;
+            return Validate(ProviderName, provider.Name) &&
+                ValidateCUIT(provider.CUIT);
         }
 
         private bool Validate(string? fst, string? scd)

@@ -13,25 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace IngenieriaBosco.Front.Views
+namespace IngenieriaBosco.Front.Dialogs.Sell
 {
     /// <summary>
-    /// Interaction logic for SellView.xaml
+    /// Interaction logic for RespIVADialog.xaml
     /// </summary>
-    public partial class SellView : UserControl
+    public partial class RespIVADialog : UserControl
     {
-        public SellView()
+        public RespIVADialog()
         {
             InitializeComponent();
-        }
-        private void Filter_Click(object sender, RoutedEventArgs e)
-        {
-            FilterPopupBox.IsPopupOpen = false;
-        }
-
-        private void Sort_Click(object sender, RoutedEventArgs e)
-        {
-            SortPopupBox.IsPopupOpen = false;
         }
     }
 }

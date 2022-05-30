@@ -137,6 +137,9 @@
     <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Insert.sql" />
     <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_InsertProduct.sql" />
     <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Delete.sql" />
+    <Build Include="dbo\StoredProcedure\spProduct\spProduct_Recived.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Recived.sql" />
+    <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Payed.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishDirectory\IngenieriaBosco.SQLServer.publish.xml" />

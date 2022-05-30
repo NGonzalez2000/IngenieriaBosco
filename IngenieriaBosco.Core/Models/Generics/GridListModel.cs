@@ -49,6 +49,7 @@ namespace IngenieriaBosco.Core.Models.Generics
         }
         public void SortExecute(SortDescription sortDescription)
         {
+            collectionView = CollectionViewSource.GetDefaultView(collection);
             collectionView.SortDescriptions.Clear();
             collectionView.SortDescriptions.Add(sortDescription);
             collectionView.Refresh();
