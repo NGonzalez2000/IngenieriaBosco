@@ -54,6 +54,17 @@ namespace IngenieriaBosco.Core.DialogModels.SellDialogs
             selectedRespIVA = RespIVAList[4];
             EvaluateResp();
         }
+        public void SetResp(string resp)
+        {
+            foreach(ResponsabilidadIVA ri in RespIVAList)
+            {
+                if(ri.Descripcion == resp)
+                {
+                    SelectedRespIVA = ri;
+                    break;
+                }
+            }
+        }
         private void EvaluateResp()
         {
             if(selectedRespIVA.Codigo == 1 ||

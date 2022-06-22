@@ -49,9 +49,10 @@ namespace IngenieriaBosco.Core.DialogModels.SellDialogs
             SetClients();
             IsClient = true;
         }
-        public ClientModel GetClient()
+        public ClientModel? GetClient()
         {
-            throw new NotImplementedException();
+            if (IsClient) return SelectedClient;
+            return TempClient;
         }
 
         private async void SetClients()
@@ -60,5 +61,16 @@ namespace IngenieriaBosco.Core.DialogModels.SellDialogs
             OnPropertyChanged(nameof(Clients));
         }
 
+        internal void SetClient(string firstName, string lastName, string cuil)
+        {
+            ClientModel client = new()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                CUIL = cuil
+            };
+            IsClient = false;
+            TempClient = client;
+        }
     }
 }

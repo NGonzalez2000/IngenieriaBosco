@@ -8,7 +8,7 @@ namespace IngenieriaBosco.Front.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return string.Format(CultureInfo.CreateSpecificCulture("es-AR"), "{0:C2}", (decimal)value);
+            return string.Format(CultureInfo.CreateSpecificCulture("es-AR"), "{0:C4}", (decimal)value);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -19,7 +19,7 @@ namespace IngenieriaBosco.Front.Converters
 
             _ = decimal.TryParse(str, out decimal ul);
 
-            return ul / 100;
+            return ul / 10000;
         }
     }
 }

@@ -71,6 +71,8 @@
     <Folder Include="dbo\StoredProcedure\spCashOperations" />
     <Folder Include="dbo\StoredProcedure\spCurrency" />
     <Folder Include="dbo\StoredProcedure\spProductOrder" />
+    <Folder Include="dbo\StoredProcedure\spSell" />
+    <Folder Include="dbo\StoredProcedure\spSellIItem" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Brands.sql" />
@@ -140,6 +142,14 @@
     <Build Include="dbo\StoredProcedure\spProduct\spProduct_Recived.sql" />
     <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Recived.sql" />
     <Build Include="dbo\StoredProcedure\spProductOrder\spProductOrder_Payed.sql" />
+    <Build Include="dbo\Tables\Sells.sql" />
+    <Build Include="dbo\StoredProcedure\spSell\spSell_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spSell\spSell_Update.sql" />
+    <Build Include="dbo\Tables\SellItems.sql" />
+    <Build Include="dbo\StoredProcedure\spSellIItem\spSellItem_Insert.sql" />
+    <Build Include="dbo\StoredProcedure\spSellIItem\spSellItem_SelectBySellId.sql" />
+    <Build Include="dbo\StoredProcedure\spSell\spSell_SelectAll.sql" />
+    <Build Include="dbo\StoredProcedure\spSell\spSell_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishDirectory\IngenieriaBosco.SQLServer.publish.xml" />

@@ -15,9 +15,15 @@ namespace IngenieriaBosco.Core.Models.Sells
         private ICollectionView? collectionView;
         private string code = string.Empty;
         private string description = string.Empty;
+        private bool isPayed;
         private decimal totalPrice;
         public int Id { get; set; }
         public bool IsRetailPrice { get; set; }
+        public bool IsPayed
+        {
+            get { return isPayed; }
+            set => SetProperty(ref isPayed, value);
+        }
         public string Code
         {
             get => code;
@@ -36,8 +42,31 @@ namespace IngenieriaBosco.Core.Models.Sells
                     collectionView.Refresh();
             }
         }
-        public ClientModel? Client { get; set; }
-        public ResponsabilidadIVA? ResponsabilidadIVA { get; set; }
+        public string PtoVta { get; set; }
+        public string FactN { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; } 
+        public string CUIL { get; set; }
+        public string Date { get; set; }
+        public SellModel()
+        {
+            PtoVta = "00001";
+            FactN = "00000000";
+            FirstName = string.Empty;
+            LastName = string.Empty;
+            CUIL = string.Empty;
+            Date = DateOnly.FromDateTime(DateTime.Now).ToShortDateString();
+        }
+        public ResponsabilidadIVA? RespIVA { get; set; }
+
+        public string ResponsabilidadIVA
+        {
+            set
+            {
+                RespIVA = new(0, string.Empty) { Descripcion = value };
+            }
+        }
+
         public ObservableCollection<SellProductModel>? ProductList { get; set; }
         public string Currency { get; set; } = string.Empty;
         public decimal TotalPrice
@@ -65,13 +94,12 @@ namespace IngenieriaBosco.Core.Models.Sells
             OnPropertyChanged(nameof(ProductList));
             SetCollectionView();
         }
-
-        public void RemoveProduct(SellProductModel product)
+        public async void RemoveProduct(SellProductModel product)
         {
             TotalPrice = decimal.Subtract(TotalPrice, product.SubTotal);
-
             ProductList!.Remove(product);
             OnPropertyChanged(nameof(ProductList));
+            await DBSell.Update(this);
 
             SetCollectionView();
         }
@@ -95,5 +123,11 @@ namespace IngenieriaBosco.Core.Models.Sells
         }
         private bool CheckDupes(string code)
             => ProductList!.FirstOrDefault(x => x.Code == code, defaultValue: null) != null;
+        public async void LoadProducts()
+        {
+            ProductList = new(await DBSellItem.SelectBySellId(Id));
+            SetCollectionView();
+            OnPropertyChanged(nameof(ProductList));
+        }
     }
 }

@@ -9,6 +9,21 @@ namespace IngenieriaBosco.Core.Models.Sells
 {
     internal class SellProductModel : IDataErrorInfo
     {
+        public SellProductModel()
+        {
+
+        }
+        public SellProductModel(SellProductModel spm)
+        {
+            Id = spm.Id;
+            Code = spm.Code;
+            Description = spm.Description;
+            Price = spm.Price;
+            SubTotal = spm.SubTotal;
+            Amount = spm.Amount;
+            Currency = spm.Currency;
+        }
+        public int Id { get; set; } = 0;
         public string? Code { get; set; }
         public string? Description { get; set; }
         public decimal Price { get; set; }

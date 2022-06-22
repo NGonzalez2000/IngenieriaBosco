@@ -63,6 +63,7 @@ namespace IngenieriaBosco.Core.DialogModels
 
             foreach (ExcelProduct_ImportModel excelp in Products.Collection)
             {
+                if (excelp.Product.Brand == null) excelp.Product.Brand = new() { Id = 1, Name = ""};
                 ExcelResult_ImportModel importResult = new();
                 if(excelp.Operation == ExcelImport_Operations.New_op)
                 {

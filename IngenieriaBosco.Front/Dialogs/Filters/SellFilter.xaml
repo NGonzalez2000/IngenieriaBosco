@@ -2,11 +2,54 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:materialDesign="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:IngenieriaBosco.Front.Dialogs.Filters"
+             xmlns:local="clr-namespace:IngenieriaBosco.Front.Dialogs.Filters" xmlns:textboxs="clr-namespace:IngenieriaBosco.Front.Controls.TextBoxs"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
-    </Grid>
+
+
+    <UniformGrid Columns="2">
+        <TextBox
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint ="Nombre"
+            Text="{Binding Path=FirstName}"
+            Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+            CharacterCasing="Upper"
+            MinWidth="150"
+            MaxWidth="150"
+            Margin="15"/>
+
+        <TextBox
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint ="Apellido"
+            Text="{Binding Path=LastName}"
+            Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+            CharacterCasing="Upper"
+            MinWidth="150"
+            MaxWidth="150"
+            Margin="15"/>
+
+        <textboxs:CuilTextBox
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint ="CUIL"
+            BindingPath="CUIL"
+            Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+            CharacterCasing="Upper"
+            MinWidth="150"
+            MaxWidth="150"
+            Margin="15"/>
+        
+        <TextBox
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint ="Fact Nº"
+            Text="{Binding Path=FactN}"
+            Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+            CharacterCasing="Upper"
+            MinWidth="150"
+            MaxWidth="150"
+            Margin="15"/>
+
+
+    </UniformGrid>
 </UserControl>

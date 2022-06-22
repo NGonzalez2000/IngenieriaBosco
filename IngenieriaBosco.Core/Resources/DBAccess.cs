@@ -20,6 +20,17 @@ namespace IngenieriaBosco.Core.Resources
                 $" Password = {DataBaseSettings.Default.Password};";
         }
 
+        public static async Task SaveData_Query<T>(string query, T parameters)
+        {
+            using SqlConnection connection = new(ConnectionString());
+            await connection.ExecuteAsync(query, parameters);
+        }
+        public static async Task<IEnumerable<T>> LoadData_Query<T, U>(string query, U parameters)
+        {
+            using SqlConnection connection = new(ConnectionString());
+
+            return await connection.QueryAsync<T>(query, parameters);
+        }
         public static async Task<IEnumerable<T>> LoadData<T, U>(string storedProcedure, U parameters)
         {
             using SqlConnection connection = new(ConnectionString());

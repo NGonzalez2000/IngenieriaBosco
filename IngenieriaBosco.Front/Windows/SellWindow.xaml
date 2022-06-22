@@ -10,10 +10,13 @@
         xmlns:converters="clr-namespace:IngenieriaBosco.Front.Converters"
         mc:Ignorable="d"
         WindowState="Maximized"
+        x:Name="Sell_Window"
         Title="SellWindow" Height="450" Width="800">
     <Window.Resources>
         <converters:StringToInt32Converter x:Key="IntConverter"/>
         <converters:ESARConverter x:Key="MoneyConverter"/>
+        <converters:BooleanToSINOConverter x:Key="SiNoConverter"/>
+        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
     </Window.Resources>
     <materialDesign:DialogHost
         DialogTheme="Inherit"
@@ -45,6 +48,21 @@
                     <TextBlock Text="{Binding Path=SellModel.Currency}" FontSize="{DynamicResource GeneralFontSize}" Margin="10 0"/>
                     <TextBlock Text="{Binding Path=SellModel.TotalPrice, Converter={StaticResource MoneyConverter}}" FontSize="{DynamicResource GeneralFontSize}"/>
                 </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="40 10">
+                    <TextBlock Text="Esta pago: " FontSize="{DynamicResource GeneralFontSize}"/>
+                    <TextBlock Text="{Binding Path=SellModel.IsPayed, Converter={StaticResource SiNoConverter}}" FontSize="{DynamicResource GeneralFontSize}"/>
+                </StackPanel>
+                <Button
+                    Content="PAGADO"
+                    Command="{Binding Path=IsPayed_Command}"
+                    FontSize="{DynamicResource ButtonFontSize}"
+                    Margin="40 10"/>
+                <Button
+                    Content="FINALIZAR"
+                    Command="{Binding Path=End_Command}"
+                    CommandParameter="{Binding ElementName=Sell_Window}"
+                    FontSize="{DynamicResource ButtonFontSize}"
+                    Margin="40 10"/>
             </StackPanel>
 
 
@@ -128,7 +146,23 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
+                            
+                            <GridViewColumn>
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button 
+                                                Margin="-8"
+                                                Background="{x:Null}"
+                                                BorderBrush="{x:Null}"
+                                                Command="{Binding Path=DataContext.Edit_Command,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
+                                                CommandParameter="{Binding}">
+                                            <materialDesign:PackIcon Kind="Pencil"
+                                                    Foreground="{DynamicResource SecondaryHueLightBrush}"  />
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
                             <GridViewColumn>
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>

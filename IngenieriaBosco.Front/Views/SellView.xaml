@@ -10,9 +10,11 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converters:CuilConverter x:Key="CUILConverter"/>
+        <converters:BooleanToSINOConverter x:Key="BooleanConverter"/>
+        <converters:ESARConverter x:Key="MoneyConverter"/>
     </UserControl.Resources>
     <materialDesign:DialogHost
-        Identifier="ProviderViewDialog"
+        Identifier="SellView"
         DialogTheme="Inherit">
 
         <Grid>
@@ -36,10 +38,10 @@
 
 
                 <!-- Column 2 Selected Sell -->
-                <!--<StackPanel>
+                <StackPanel>
                     <UniformGrid Columns="2">
                         <TextBlock
-                            Text="PROVEEDOR SELECCIONADO"
+                            Text="VENTA SELECCIONADA"
                             Margin="0 20 0 0"
                             FontSize="{DynamicResource HeaderFontSize}"
                             Foreground="{DynamicResource SecondaryHueMidBrush}"/>
@@ -49,7 +51,7 @@
                             <Button
                                 ToolTip="EDITAR"
                                 Style="{StaticResource MaterialDesignIconButton}"
-                                Command="{Binding Path=EditProviderCommand}">
+                                Command="{Binding Path=ViewSell_Command}">
 
                                 <Button.Content>
                                     <materialDesign:PackIcon 
@@ -61,7 +63,7 @@
                             <Button
                                 ToolTip="ELIMINAR"
                                 Style="{StaticResource MaterialDesignIconButton}"
-                                Command="{Binding Path=DeleteProviderCommand}">
+                                Command="{Binding Path=DeleteSell_Command}">
 
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="Delete"
@@ -84,25 +86,30 @@
                             FontSize="{DynamicResource SecondaryHeaderFontSize}"
                             VerticalAlignment="Center"/>
                         <TextBlock
-                            Text="{Binding Path=ProviderList.SelectedItem.Name}"
+                            Text="{Binding Path=Sells.SelectedItem.FirstName}"
                             FontSize="{DynamicResource GeneralFontSize}"
                             VerticalAlignment="Center"/>
+                        <TextBlock
+                            Text="{Binding Path=Sells.SelectedItem.LastName}"
+                            FontSize="{DynamicResource GeneralFontSize}"
+                            VerticalAlignment="Center"
+                            Margin="5 0 0 0"/>
                     </StackPanel>
 
                     <StackPanel
                         Margin="0 20 0 0"
                         Orientation="Horizontal">
                         <TextBlock
-                            Text="CUIT:   "
+                            Text="CUIL:   "
                             FontFamily="Bold"
                             FontSize="{DynamicResource SecondaryHeaderFontSize}"
                             VerticalAlignment="Center"/>
                         <TextBlock
-                            Text="{Binding Path=ProviderList.SelectedItem.CUIT, Converter={StaticResource CUILConverter}}"
+                            Text="{Binding Path=Sells.SelectedItem.CUIL, Converter={StaticResource CUILConverter}}"
                             FontSize="{DynamicResource GeneralFontSize}"
                             VerticalAlignment="Center"/>
                     </StackPanel>
-                </StackPanel>-->
+                </StackPanel>
 
 
                 <!--  Column 3 OrderBy & Filter  -->
@@ -161,7 +168,64 @@
 
             </UniformGrid>
             <!--List Of Sells-->
-            
+            <ListView
+                Margin="0 50 0 0"
+                Grid.Row="1"
+                ItemsSource="{Binding Path=Sells.Collection}"
+                SelectedItem="{Binding Path=Sells.SelectedItem}">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Cliente">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=FirstName}" Margin="0 0 5 0" FontSize="{DynamicResource GridFontSize}"/>
+                                        <TextBlock Text="{Binding Path=LastName}" Margin="0 0 5 0" FontSize="{DynamicResource GridFontSize}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="PtoVta-FactN">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=PtoVta}" FontSize="{DynamicResource GridFontSize}"/>
+                                        <TextBlock Text="{Binding Path=FactN, StringFormat={}-{0}}" Margin="0 0 5 0" FontSize="{DynamicResource GridFontSize}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Fecha">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Date}" FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Pagado">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=IsPayed,Converter={StaticResource BooleanConverter}}" FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Moneda">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Currency}" FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Total">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=TotalPrice,Converter={StaticResource MoneyConverter}}" FontSize="{DynamicResource GridFontSize}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
     </materialDesign:DialogHost>
 </UserControl>

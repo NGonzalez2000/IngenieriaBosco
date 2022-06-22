@@ -59,11 +59,13 @@
                      materialDesign:HintAssist.Hint="Nombre"
                      Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                      FontSize="{DynamicResource GeneralFontSize}"
+                     CharacterCasing="Upper"
                      Margin="10"/>
-            <TextBox Text="{Binding Path=TempClient.FirstName}"
+            <TextBox Text="{Binding Path=TempClient.LastName}"
                      materialDesign:HintAssist.Hint="Apellido"
                      Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                      FontSize="{DynamicResource GeneralFontSize}"
+                     CharacterCasing="Upper"
                      Margin="10"/>
         </StackPanel>
     </Grid>

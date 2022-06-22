@@ -145,11 +145,11 @@ namespace IngenieriaBosco.Core.ViewModels
                         if (propN == 1) products[rowNumber].Product.Description = (string)Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text;
                         if (propN == 2) await Task.Run(() => products[rowNumber].SetCategory((string)Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text));
                         if (propN == 3) await Task.Run(() => products[rowNumber].SetBrand((string)Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text));
-                        if (propN == 4) products[rowNumber].Product.ListingPrice = Convert.ToDecimal(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text);
-                        if (propN == 5) products[rowNumber].Product.RetailPrice = Convert.ToDecimal(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text);
-                        if (propN == 6) products[rowNumber].Product.WholesalerPrice = Convert.ToDecimal(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text);
+                        if (propN == 4) products[rowNumber].Product.ListingPrice = decimal.TryParse(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text.ToString(),out decimal val)? val : 0;
+                        if (propN == 5) products[rowNumber].Product.RetailPrice = decimal.TryParse(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text.ToString(), out decimal val) ? val : 0;
+                        if (propN == 6) products[rowNumber].Product.WholesalerPrice = decimal.TryParse(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text.ToString(), out decimal val) ? val : 0;
                         if (propN == 7) products[rowNumber].Product.Stock = int.TryParse(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text.ToString(), out int val)? val : 0;
-                        if (propN == 8) products[rowNumber].Product.WarningStock = Convert.ToInt32(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text);
+                        if (propN == 8) products[rowNumber].Product.WarningStock = int.TryParse(Sheet.Rows![Sheet.FirstRow + rowNumber - 1].ExcelCells[asignations[propN][0] - 'A'].Text.ToString(), out int val) ? val : 0;
                     }
                 }
             }

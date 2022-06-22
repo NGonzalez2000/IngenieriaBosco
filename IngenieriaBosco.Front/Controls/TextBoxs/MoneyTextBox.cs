@@ -63,11 +63,11 @@ namespace IngenieriaBosco.Front.Controls.TextBoxs
             //Check we are indeed handling a number
             if (decimal.TryParse(value, out decimal ul))
             {
-                ul /= 100;
+                ul /= 10000;
                 //Unsub the event so we don't enter a loop
                 MoneyTextBox.TextChanged -= MoneyTextBox_TextChanged;
                 //Format the text as currency
-                MoneyTextBox.Text = string.Format(CultureInfo.CreateSpecificCulture("es-AR"), "{0:C2}", ul);
+                MoneyTextBox.Text = string.Format(CultureInfo.CreateSpecificCulture("es-AR"), "{0:C4}", ul);
                 MoneyTextBox.TextChanged += MoneyTextBox_TextChanged;
                 MoneyTextBox.Select(MoneyTextBox.Text.Length, 0);
             }
@@ -77,7 +77,7 @@ namespace IngenieriaBosco.Front.Controls.TextBoxs
 
             if (!goodToGo)
             {
-                MoneyTextBox.Text = "$ 0,00";
+                MoneyTextBox.Text = "$ 0,0000";
                 MoneyTextBox.Select(MoneyTextBox.Text.Length, 0);
             }
             MoneyTextBox.CaretIndex = int.MaxValue;
@@ -85,7 +85,7 @@ namespace IngenieriaBosco.Front.Controls.TextBoxs
 
         private static bool TextisValid(string text)
         {
-            Regex money = new(@"^\$ (\d{1,3}(\.\d{3})*|(\d+))(\,\d{2})?$");
+            Regex money = new(@"^\$ (\d{1,3}(\.\d{3})*|(\d+))(\,\d{4})?$");
             return money.IsMatch(text);
         }
 

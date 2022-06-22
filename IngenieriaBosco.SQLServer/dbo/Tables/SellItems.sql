@@ -1,0 +1,12 @@
+﻿CREATE TABLE [dbo].[SellItems]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+	[SellId] INT FOREIGN KEY REFERENCES [dbo].[Sells](Id) NOT NULL,
+	[Code] NVARCHAR(40) NOT NULL,
+	[Description] TEXT NOT NULL,
+	[Amount] INT NOT NULL,
+	[Price] MONEY NOT NULL,
+	[SubTotal] MONEY NOT NULL,
+	[Currency] VARCHAR(3) NOT NULL
+
+)
