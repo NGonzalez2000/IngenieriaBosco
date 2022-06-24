@@ -7,12 +7,12 @@
   IgnorableNamespaces="uap rescap">
 
   <Identity
-    Name="799781f9-8565-4f0c-bcad-c4433b99848f"
-    Publisher="CN=Nico"
+    Name="bdbc558f-4526-4ca0-a734-2ca8e7012a10"
+    Publisher="CN=Nicolas Gonzalez"
     Version="1.0.0.0" />
 
   <Properties>
-    <DisplayName>IngenieriaBosco.Release</DisplayName>
+    <DisplayName>ClickSell</DisplayName>
     <PublisherDisplayName>Nico</PublisherDisplayName>
     <Logo>Images\StoreLogo.png</Logo>
   </Properties>
@@ -32,11 +32,11 @@
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
         DisplayName="ClickSell"
-        Description="ClickSell first release"
+        Description="Production Release"
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png" />
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png" ShortName="ClickSell"/>
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
