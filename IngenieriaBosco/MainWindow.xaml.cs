@@ -5,6 +5,7 @@ using IngenieriaBosco.Interface;
 using MaterialDesignThemes.Wpf;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,10 +31,13 @@ namespace IngenieriaBosco
             if (GeneralSettings.Default.NeedsUpdate)
             {
                 ThemeSettings.Default.Upgrade();
+                ThemeSettings.Default.Save();
                 DataBaseSettings.Default.Upgrade();
+                DataBaseSettings.Default.Save();
                 GeneralSettings.Default.Upgrade();
                 GeneralSettings.Default.NeedsUpdate = false;
                 GeneralSettings.Default.Save();
+                
             }
 
             Task.Factory.StartNew(() => Thread.Sleep(2500)).ContinueWith(t =>
