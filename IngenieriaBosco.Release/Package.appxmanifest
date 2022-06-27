@@ -9,7 +9,7 @@
   <Identity
     Name="bdbc558f-4526-4ca0-a734-2ca8e7012a10"
     Publisher="CN=Nicolas Gonzalez"
-    Version="1.0.0.0" />
+    Version="1.0.1.0" />
 
   <Properties>
     <DisplayName>ClickSell</DisplayName>

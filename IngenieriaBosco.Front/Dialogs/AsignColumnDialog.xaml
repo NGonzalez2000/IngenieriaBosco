@@ -8,14 +8,18 @@
              xmlns:system="clr-namespace:System;assembly=mscorlib" 
              mc:Ignorable="d" 
              MinWidth="500"
+             MaxHeight="500"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <ScrollViewer>
+        
+    
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-
+        
         <TextBlock
             Text="Asignacion de columnas"
             Margin="30"
@@ -155,4 +159,5 @@
             </Button>
         </StackPanel>
     </Grid>
+    </ScrollViewer>
 </UserControl>
